@@ -6,4 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ListeDeCourse">
 
+    <include layout="@layout/footer" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

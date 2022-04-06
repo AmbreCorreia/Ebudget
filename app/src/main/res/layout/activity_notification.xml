@@ -16,7 +16,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="260dp" />
+        tools:layout_editor_absoluteY="260dp"
+        tools:ignore="MissingConstraints" />
+
+    <include layout="@layout/footer" />
 
     <TextView
         android:id="@+id/textView3"
@@ -26,7 +29,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="137dp" />
+        tools:layout_editor_absoluteY="137dp"
+        tools:ignore="MissingConstraints" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -38,7 +42,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="437dp" />
+        tools:layout_editor_absoluteY="437dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView4"
@@ -60,6 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="526dp" />
+        tools:layout_editor_absoluteY="526dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
