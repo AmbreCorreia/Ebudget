@@ -10,6 +10,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ebudget">
         <activity
+            android:name=".ListeDeCourse"
+            android:exported="false" />
+        <activity
+            android:name=".Profil"
+            android:exported="false" />
+        <activity
+            android:name=".Stat"
+            android:exported="false" />
+        <activity
+            android:name=".Notification"
+            android:exported="false" />
+        <activity
+            android:name=".Category"
+            android:exported="false" />
+        <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
