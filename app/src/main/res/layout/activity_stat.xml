@@ -7,6 +7,8 @@
     tools:context=".Stat">
 
     <include layout="@layout/footer" />
+    <include layout="@layout/header" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

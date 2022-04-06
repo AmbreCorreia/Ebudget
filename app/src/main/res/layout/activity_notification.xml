@@ -20,6 +20,8 @@
         tools:ignore="MissingConstraints" />
 
     <include layout="@layout/footer" />
+    <include layout="@layout/header" />
+
 
     <TextView
         android:id="@+id/textView3"
