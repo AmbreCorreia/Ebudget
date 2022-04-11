@@ -26,7 +26,7 @@
             android:backgroundTint="#FFFFFF"
             android:fallbackLineSpacing="false"
             android:hapticFeedbackEnabled="false"
-            android:text="< retour"
+            android:text="retour"
             android:textColor="#000000"
             app:rippleColor="#9F9292" />
     </RelativeLayout>
