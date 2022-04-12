@@ -17,7 +17,7 @@
         android:gravity="center">
 
         <ImageButton
-            android:id="@+id/imageButton8"
+            android:id="@+id/imageButtonCourses"
             android:layout_width="98dp"
             android:layout_height="77dp"
             android:layout_alignParentEnd="true"
@@ -27,7 +27,7 @@
             app:srcCompat="@drawable/ic_baseline_shopping_cart_24" />
 
         <ImageButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/imageButtonProfil"
             android:layout_width="91dp"
             android:layout_height="77dp"
             android:layout_alignParentEnd="true"
@@ -37,7 +37,7 @@
             app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/imageButtonStats"
             android:layout_width="88dp"
             android:layout_height="77dp"
             android:layout_alignParentStart="true"
@@ -47,7 +47,7 @@
             app:srcCompat="@drawable/ic_baseline_equalizer_24" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/imageButtonNotifs"
             android:layout_width="89dp"
             android:layout_height="78dp"
             android:layout_alignParentStart="true"
@@ -57,7 +57,7 @@
             app:srcCompat="@drawable/ic_baseline_notification_important_24" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/imageButtonCategory"
             android:layout_width="97dp"
             android:layout_height="82dp"
             android:layout_alignParentStart="true"

@@ -19,7 +19,7 @@
             android:name=".Stat"
             android:exported="false" />
         <activity
-            android:name=".Notification"
+            android:name=".NotificationPage"
             android:exported="false" />
         <activity
             android:name=".Category"
