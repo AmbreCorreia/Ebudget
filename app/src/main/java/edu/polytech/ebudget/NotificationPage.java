@@ -4,6 +4,7 @@ import static edu.polytech.ebudget.Notification.CHANNEL_ID;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -19,7 +20,9 @@ public class NotificationPage extends AppCompatActivity {
         findViewById(R.id.switchNotifs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendNotificationChannel("Attention !", "Vous avez dépassé votre budget !", CHANNEL_ID, NotificationCompat.PRIORITY_DEFAULT);
+                boolean checked = ((Switch)view).isChecked();
+                if(checked)
+                    sendNotificationChannel("Attention !", "Vous avez dépassé votre budget !", CHANNEL_ID, NotificationCompat.PRIORITY_DEFAULT);
             }
         });
     }
