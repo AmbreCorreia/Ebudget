@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Category">
 
-    <include layout="@layout/footer" />
-    <include layout="@layout/header" />
-
     <ProgressBar
         android:id="@+id/progress_bar_fruits"
         style="@style/CircularDeterminateProgressBar"
@@ -47,6 +44,15 @@
         app:layout_constraintEnd_toEndOf="@+id/progress_bar_fruits"
         app:layout_constraintTop_toBottomOf="@+id/progress_bar_fruits" />
 
+    <Button
+        android:id="@+id/returnButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Retour"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
