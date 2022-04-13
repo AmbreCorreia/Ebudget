@@ -2,7 +2,9 @@ package edu.polytech.ebudget;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 public class Stat extends AppCompatActivity {
 
@@ -10,5 +12,14 @@ public class Stat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stat);
+        returnButton();
+    }
+
+    private void returnButton(){
+        Button btn = (Button) findViewById(R.id.returnButton3);
+        btn.setOnClickListener(click ->{
+            Intent intent = new Intent(Stat.this, Home.class);
+            startActivity(intent);
+        });
     }
 }

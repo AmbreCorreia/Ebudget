@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="categories"
+        android:icon="@drawable/ic_categories_foreground"
+        android:id='@+id/category'
+        />
+    <item android:title="notifications"
+        android:icon="@drawable/ic_baseline_notification_important_24"
+        android:id='@+id/notification'
+        />
+    <item android:title="statistiques"
+        android:icon="@drawable/ic_statistiques_foreground"
+        android:id='@+id/statistique'
+        />
+    <item android:title="profil"
+        android:icon="@drawable/ic_profil_foreground"
+        android:id='@+id/profil'
+        />
+    <item android:title="courses"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:id='@+id/course'
+        />
+
+
+</menu>
