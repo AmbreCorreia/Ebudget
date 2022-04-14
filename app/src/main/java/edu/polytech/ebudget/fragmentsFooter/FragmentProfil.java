@@ -1,4 +1,4 @@
-package edu.polytech.ebudget;
+package edu.polytech.ebudget.fragmentsFooter;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.polytech.ebudget.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FourthFragment#newInstance} factory method to
+ * Use the {@link FragmentProfil#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FourthFragment extends Fragment {
+public class FragmentProfil extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class FourthFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FourthFragment() {
+    public FragmentProfil() {
         // Required empty public constructor
     }
 
@@ -37,8 +39,8 @@ public class FourthFragment extends Fragment {
      * @return A new instance of fragment FourthFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FourthFragment newInstance(String param1, String param2) {
-        FourthFragment fragment = new FourthFragment();
+    public static FragmentProfil newInstance(String param1, String param2) {
+        FragmentProfil fragment = new FragmentProfil();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

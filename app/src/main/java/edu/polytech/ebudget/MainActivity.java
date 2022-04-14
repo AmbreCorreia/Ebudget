@@ -6,10 +6,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 
 import edu.polytech.ebudget.databinding.ActivityMainBinding;
+import edu.polytech.ebudget.fragmentsFooter.FragmentCourses;
+import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
+import edu.polytech.ebudget.fragmentsFooter.FragmentNotif;
+import edu.polytech.ebudget.fragmentsFooter.FragmentProfil;
+import edu.polytech.ebudget.fragmentsFooter.FragmentRetour;
+import edu.polytech.ebudget.fragmentsFooter.FragmentStats;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -22,7 +26,7 @@ public class MainActivity extends AppCompatActivity{
 
         getSupportActionBar().hide();
 
-        replaceFragment(new SixthFragment());
+        replaceFragment(new FragmentRetour());
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -30,19 +34,19 @@ public class MainActivity extends AppCompatActivity{
         binding.bottomNavigationView.setOnItemSelectedListener(item ->{
             switch (item.getItemId()){
                 case R.id.category:
-                    replaceFragment(new FirstFragment());
+                    replaceFragment(new FragmentCategory());
                     break;
                 case R.id.notification:
-                    replaceFragment(new SecondFragment());
+                    replaceFragment(new FragmentNotif());
                     break;
                 case R.id.statistique:
-                    replaceFragment(new ThirdFragment());
+                    replaceFragment(new FragmentStats());
                     break;
                 case R.id.profil:
-                    replaceFragment(new FourthFragment());
+                    replaceFragment(new FragmentProfil());
                     break;
                 case R.id.course:
-                    replaceFragment(new FifthFragment());
+                    replaceFragment(new FragmentCourses());
                     break;
             }
             return true;
