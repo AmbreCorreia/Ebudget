@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_java"
+    app:startDestination="@id/LoginActivity">
+
+    <fragment
+        android:id="@+id/LoginActivity"
+        android:name="edu.polytech.ebudget.login.EmailPasswordFragment"
+        tools:layout="@layout/fragment_emailpassword">
+        <action
+            android:id="@+id/action_emailSignInButton"
+            app:destination="@id/MainActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/MainActivity"
+        android:name="edu.polytech.ebudget.MainActivity"
+        tools:layout="@layout/activity_main" />
+
+</navigation>

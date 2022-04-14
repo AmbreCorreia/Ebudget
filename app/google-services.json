@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "628852337248",
+    "project_id": "ebudget-faf8b",
+    "storage_bucket": "ebudget-faf8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628852337248:android:76a6622ad9ce51e4537105",
+        "android_client_info": {
+          "package_name": "edu.polytech.ebudget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628852337248-0hpbjj6f3c9cgchbq1v8u8vvqojij554.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD499NvkJniAsEpvbGK1bj75grXC0-G-MU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628852337248-0hpbjj6f3c9cgchbq1v8u8vvqojij554.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

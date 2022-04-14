@@ -1,36 +1,22 @@
 package edu.polytech.ebudget;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
 public class Login extends AppCompatActivity {
 
-    private EditText email, password;
-    private Button btnLogin;
-    private TextView loginQst;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_base);
 
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        btnLogin = findViewById(R.id.btnLogin);
-        loginQst = findViewById(R.id.LoginQst);
+        Navigation.findNavController(this, R.id.nav_host_fragment)
+                .setGraph(R.navigation.nav_graph_java);
 
-        loginQst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Login.this, Register.class);
-                startActivity(intent);
-            }
-        });
     }
+
 }

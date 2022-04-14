@@ -29,23 +29,17 @@ public class Home extends AppCompatActivity {
 
         updateProgressBar();
 
-        increment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (progress <= 90) {
-                    progress += 10;
-                    updateProgressBar();
-                }
+        increment.setOnClickListener(view -> {
+            if (progress <= 90) {
+                progress += 10;
+                updateProgressBar();
             }
         });
 
-        decrement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (progress >= 10) {
-                    progress -= 10;
-                    updateProgressBar();
-                }
+        decrement.setOnClickListener(view -> {
+            if (progress >= 10) {
+                progress -= 10;
+                updateProgressBar();
             }
         });
 
