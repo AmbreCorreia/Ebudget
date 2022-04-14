@@ -2,4 +2,15 @@
     <string name="app_name">Ebudget</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <string-array name="items">
+        <item>Tomates</item>
+        <item>Fromage</item>
+        <item>Lardons</item>
+        <item>Bananes</item>
+        <item>Chocolat</item>
+        <item>Salade</item>
+        <item>Poulet</item>
+    </string-array>
+    
 </resources>

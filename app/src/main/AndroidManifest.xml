@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ebudget">
         <activity
+            android:name=".ListExpenses"
+            android:exported="false" />
+        <activity
             android:name=".ListeDeCourse"
             android:exported="false" />
         <activity

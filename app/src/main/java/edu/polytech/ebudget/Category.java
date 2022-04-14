@@ -15,10 +15,6 @@ public class Category extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         Button goLogin = (Button) findViewById(R.id.button_decr_fruits);
-        goLogin.setOnClickListener(click -> {
-                Intent intent = new Intent(Category.this, Login.class);
-                startActivity(intent);
-        });
 
         returnButton();
 
