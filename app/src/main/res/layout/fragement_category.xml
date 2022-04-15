@@ -54,18 +54,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        app:fabSize="normal"
-        app:backgroundTint="#000"
-        android:src="@drawable/ic_add"
-        android:layout_margin="16dp"
-        tools:ignore="MissingConstraints" />
-
-
+        android:layout_marginTop="596dp"
+        android:layout_marginEnd="120dp"
+        android:text="Add a category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

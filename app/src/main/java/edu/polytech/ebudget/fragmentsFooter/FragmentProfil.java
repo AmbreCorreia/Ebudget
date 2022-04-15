@@ -67,7 +67,7 @@ public class FragmentProfil extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.activity_profil, container, false);
+        View rootView =  inflater.inflate(R.layout.fragment_profil, container, false);
 
         logout= (Button) rootView.findViewById(R.id.logout);
         logout.setOnClickListener(click -> {

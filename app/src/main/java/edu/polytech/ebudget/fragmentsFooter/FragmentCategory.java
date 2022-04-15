@@ -61,6 +61,8 @@ public class FragmentCategory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_category, container, false);
+        View rootView = inflater.inflate(R.layout.fragement_category, container, false);
+
+        return rootView;
     }
 }
