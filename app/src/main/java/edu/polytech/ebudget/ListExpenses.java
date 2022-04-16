@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ListExpenses extends AppCompatActivity {
 
-    private FloatingActionButton fab;
+    //private FloatingActionButton fab;
     //private DatabaseReference budgetRef;
     //private FirebaseAuth mAuth;
     //private ProgressDialog loader;
@@ -29,13 +29,13 @@ public class ListExpenses extends AppCompatActivity {
 
         //mAuth = FirebaseAuth.getInstance();
 
-        fab = findViewById(R.id.fab);
+        /*fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addItem();
             }
-        });
+        });*/
     }
 
     private void addItem(){

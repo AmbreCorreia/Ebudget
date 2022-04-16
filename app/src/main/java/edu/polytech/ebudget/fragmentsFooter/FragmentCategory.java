@@ -3,12 +3,18 @@ package edu.polytech.ebudget.fragmentsFooter;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import edu.polytech.ebudget.FragmentAddCategory;
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.login.EmailPasswordFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +31,7 @@ public class FragmentCategory extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button addCat;
 
     public FragmentCategory() {
         // Required empty public constructor
@@ -61,7 +68,16 @@ public class FragmentCategory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragement_category, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_category, container, false);
+
+        addCat = (Button) rootView.findViewById(R.id.addCategoryButton);
+        addCat.setOnClickListener(click -> {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, new FragmentAddCategory());
+            //fragmentTransaction.addToBackStack("category");
+            fragmentTransaction.commit();
+        });
 
         return rootView;
     }
