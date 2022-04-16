@@ -3,11 +3,16 @@ package edu.polytech.ebudget.fragmentsFooter;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import edu.polytech.ebudget.FragmentAddCategory;
+import edu.polytech.ebudget.FragmentAddItemCourses;
 import edu.polytech.ebudget.R;
 
 /**
@@ -25,6 +30,7 @@ public class FragmentCourses extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button add;
 
     public FragmentCourses() {
         // Required empty public constructor
@@ -61,6 +67,16 @@ public class FragmentCourses extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_liste_de_course, container, false);
+        View rootview =  inflater.inflate(R.layout.activity_liste_de_course, container, false);
+
+        add = (Button) rootview.findViewById(R.id.AddItemCourse);
+        add.setOnClickListener(click -> {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, new FragmentAddItemCourses());
+            fragmentTransaction.commit();
+        });
+
+        return rootview;
     }
 }

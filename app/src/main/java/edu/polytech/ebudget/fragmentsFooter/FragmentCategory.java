@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import edu.polytech.ebudget.FragmentAddCategory;
+import edu.polytech.ebudget.FragmentAddItemCategory;
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.databinding.FragmentCategoryBinding;
 import edu.polytech.ebudget.login.EmailPasswordFragment;
 
 /**
@@ -31,7 +33,7 @@ public class FragmentCategory extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button addCat;
+    private FragmentCategoryBinding binding;
 
     public FragmentCategory() {
         // Required empty public constructor
@@ -68,10 +70,9 @@ public class FragmentCategory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_category, container, false);
+        binding = FragmentCategoryBinding.inflate(inflater, container, false);
 
-        addCat = (Button) rootView.findViewById(R.id.addCategoryButton);
-        addCat.setOnClickListener(click -> {
+        binding.addCategoryButton.setOnClickListener(click -> {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, new FragmentAddCategory());
@@ -79,6 +80,17 @@ public class FragmentCategory extends Fragment {
             fragmentTransaction.commit();
         });
 
-        return rootView;
+        binding.addItemCategory.setOnClickListener(click -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("param1", "default");
+            FragmentAddItemCategory frag = new FragmentAddItemCategory();
+            frag.setArguments(bundle);
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, frag);
+            fragmentTransaction.commit();
+        });
+
+        return binding.getRoot();
     }
 }

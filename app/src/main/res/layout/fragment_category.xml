@@ -58,11 +58,23 @@
         android:id="@+id/addCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="596dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="72dp"
         android:text="Add a category"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/addItemCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="72dp"
+        android:text="Add Item"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toEndOf="@+id/addCategoryButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

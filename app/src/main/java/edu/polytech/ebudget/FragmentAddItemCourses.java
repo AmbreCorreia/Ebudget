@@ -1,31 +1,21 @@
 package edu.polytech.ebudget;
-
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
+import edu.polytech.ebudget.databinding.FragmentAdditemCourseBinding;
+import edu.polytech.ebudget.datamodels.Item;
+import edu.polytech.ebudget.fragmentsFooter.FragmentCourses;
 
-import edu.polytech.ebudget.databinding.FragmentAddcategoryBinding;
-import edu.polytech.ebudget.datamodels.Category;
-import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
-
-public class FragmentAddCategory extends Fragment {
+public class FragmentAddItemCourses extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,9 +25,9 @@ public class FragmentAddCategory extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private FragmentAddcategoryBinding binding;
+    private FragmentAdditemCourseBinding bind;
 
-    public FragmentAddCategory() {
+    public FragmentAddItemCourses() {
         // Required empty public constructor
     }
 
@@ -50,8 +40,8 @@ public class FragmentAddCategory extends Fragment {
      * @return A new instance of fragment FourthFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentAddCategory newInstance(String param1, String param2) {
-        FragmentAddCategory fragment = new FragmentAddCategory();
+    public static FragmentAddItemCourses newInstance(String param1, String param2) {
+        FragmentAddItemCourses fragment = new FragmentAddItemCourses();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,21 +62,23 @@ public class FragmentAddCategory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentAddcategoryBinding.inflate(inflater, container, false);
+        bind = FragmentAdditemCourseBinding.inflate(inflater, container, false);
 
-        binding.addButton.setOnClickListener(click -> {
-            String name = binding.nameInput.getText().toString().trim();
-            int budget = Integer.parseInt(binding.budgetInput.getText().toString().trim());
+        bind.addButton.setOnClickListener(click -> {
+            String name = bind.nameInput.getText().toString().trim();
+            String category = bind.categoryInput.getText().toString().trim();
+            int price = Integer.parseInt(bind.priceInput.getText().toString().trim());
+            int quantity = Integer.parseInt(bind.quantityInput.getText().toString().trim());
             String user = FirebaseAuth.getInstance().getUid();
 
-            new Category(name, budget, user).addToDatabase();
+            new Item(name, category, price, quantity, user).addToDatabase();
 
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout, new FragmentCategory());
+            fragmentTransaction.replace(R.id.frame_layout, new FragmentCourses());
             fragmentTransaction.commit();
         });
 
-        return binding.getRoot();
+        return bind.getRoot();
     }
 }
