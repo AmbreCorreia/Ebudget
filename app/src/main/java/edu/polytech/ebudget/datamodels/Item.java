@@ -23,6 +23,8 @@ public class Item {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddItem";
 
+    public Item(){}
+
     public Item(String name, String category, int price, String user){
         this.name = name;
         this.category = category;

@@ -14,6 +14,8 @@ public class Category {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddCategory";
 
+    public Category(){}
+
     public Category(String name, int budget, String user){
         this.name = name;
         this.budget = budget;
