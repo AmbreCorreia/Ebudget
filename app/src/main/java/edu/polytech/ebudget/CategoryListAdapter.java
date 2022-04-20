@@ -11,6 +11,7 @@ import android.widget.TextView;
 import edu.polytech.ebudget.datamodels.Category;
 
 public class CategoryListAdapter extends ArrayAdapter<Category> {
+
     private int layoutResourceId;
     private static final String LOG_TAG = "CategoryListAdapter";
 
@@ -18,7 +19,6 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
         super(context, textViewResourceId);
         layoutResourceId = textViewResourceId;
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -34,11 +34,11 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
                 v = convertView;
             }
 
-//            TextView name = (TextView) v.findViewById(R.id.display_name);
-//            TextView budget = (TextView) v.findViewById(R.id.display_budget);
+            TextView name = (TextView) v.findViewById(R.id.display_name);
+            TextView budget = (TextView) v.findViewById(R.id.display_budget);
 
-//            name.setText(item.name);
-//            budget.setText(item.budget);
+            name.setText(item.name);
+            budget.setText(String.valueOf(item.budget));
 
             return v;
 
