@@ -104,7 +104,7 @@ public class FragmentAddItemCourses extends Fragment implements AdapterView.OnIt
             int quantity = Integer.parseInt(bind.quantityInput.getText().toString().trim());
             String user = FirebaseAuth.getInstance().getUid();
 
-            new Item(name, category, price, quantity, user).addToDatabase();
+            new Item(name, category, price, quantity, user, false).addToDatabase();
 
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
