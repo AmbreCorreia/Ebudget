@@ -7,12 +7,15 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -25,6 +28,7 @@ import android.widget.RemoteViews;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.notifications.ListeNotifications;
 import edu.polytech.ebudget.notifications.NotificationPage;
+import edu.polytech.ebudget.notifications.Notifications;
 import edu.polytech.ebudget.notifications.afterNotification;
 
 /**
@@ -36,6 +40,7 @@ public class FragmentNotif extends Fragment {
     private NotificationManager notifManager;
     private NotificationChannel notifChannel;
     private final String chanelId = "i.apps.notifications";
+    private final String title = "Titre ma Notif";
     private final String description = "Description notif";
     NotificationCompat.Builder builder;
 
@@ -92,30 +97,35 @@ public class FragmentNotif extends Fragment {
         btnAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("test2");
                 Intent intent = new Intent(getContext(), afterNotification.class);
                 PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 RemoteViews contentView = new RemoteViews(getActivity().getPackageName(), R.layout.activity_after_notification);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    notifChannel = new NotificationChannel(chanelId, description, NotificationManager.IMPORTANCE_HIGH);
+                    notifChannel = new NotificationChannel(chanelId, title, NotificationManager.IMPORTANCE_HIGH);
                     notifChannel.enableLights(true);
+                    notifChannel.setDescription(description);
                     notifChannel.setLightColor(Color.GREEN);
                     notifChannel.enableVibration(false);
                     notifManager.createNotificationChannel(notifChannel);
 
                     builder = new NotificationCompat.Builder(getContext(), chanelId)
                             .setContent(contentView)
+                            .setContentTitle(title)
                             .setSmallIcon(R.drawable.ic_baseline_apps_24)
-                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_baseline_apps_24))
+                            //.setLargeIcon(BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_baseline_apps_24))
                             .setContentIntent(pendingIntent);
 
                 }else {
                     builder = new NotificationCompat.Builder(getContext())
                             .setContent(contentView)
                             .setSmallIcon(R.drawable.ic_baseline_apps_24)
-                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_baseline_apps_24))
+                            //.setLargeIcon(BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_baseline_apps_24))
+                            //.setLargeIcon(((VectorDrawable) ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.ic_baseline_apps_24, null)))
                             .setContentIntent(pendingIntent);
                 }
+
 
                 notifManager.notify(1234, builder.build());
             }
@@ -126,7 +136,8 @@ public class FragmentNotif extends Fragment {
         btnNotifList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ListeNotifications.class);
+                System.out.println("test1");
+                Intent intent = new Intent(getContext(), Notifications.class);
                 startActivity(intent);
             }
         });
