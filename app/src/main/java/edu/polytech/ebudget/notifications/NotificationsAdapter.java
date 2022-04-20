@@ -8,14 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.datamodels.Notification;
 
 public class NotificationsAdapter extends BaseAdapter {
-    private final ListeNotifications notifications;
+    private final ArrayList<Notification> notifications;
     private INotificationAdapterListener listner;
     private LayoutInflater mInflater;
 
-    public NotificationsAdapter(Context context, ListeNotifications notifications){
+    public NotificationsAdapter(Context context, ArrayList<Notification> notifications){
         mInflater = LayoutInflater.from(context);
         this.notifications = notifications;
     }
