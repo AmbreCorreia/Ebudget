@@ -32,7 +32,7 @@ public class NotificationsAdapter extends BaseAdapter {
         TextView tvCategory = layoutItem.findViewById(R.id.notifCategory);
         TextView tvDescription = layoutItem.findViewById((R.id.notifDescription));
 
-        tvCategory.setText(notifications.get(position).getCategorie());
+        tvCategory.setText(notifications.get(position).getCategory());
         tvDescription.setText(notifications.get(position).getDescription());
 
         layoutItem.setOnClickListener(click -> {
