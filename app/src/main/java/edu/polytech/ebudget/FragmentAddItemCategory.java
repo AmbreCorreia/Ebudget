@@ -1,5 +1,4 @@
-package edu.polytech.ebudget.fragmentsFooter;
-
+package edu.polytech.ebudget;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,30 +8,27 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import edu.polytech.ebudget.FragmentAddCategory;
-import edu.polytech.ebudget.FragmentAddItemCourses;
-import edu.polytech.ebudget.R;
+import com.google.firebase.auth.FirebaseAuth;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentCourses#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentCourses extends Fragment {
+import edu.polytech.ebudget.databinding.FragmentAdditemCategoryBinding;
+import edu.polytech.ebudget.datamodels.Item;
+import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
+import edu.polytech.ebudget.fragmentsFooter.FragmentCourses;
+
+public class FragmentAddItemCategory extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String CATEGORY = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String category;
     private String mParam2;
-    private Button add;
+    private FragmentAdditemCategoryBinding bind;
 
-    public FragmentCourses() {
+    public FragmentAddItemCategory() {
         // Required empty public constructor
     }
 
@@ -42,13 +38,13 @@ public class FragmentCourses extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FifthFragment.
+     * @return A new instance of fragment FourthFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentCourses newInstance(String param1, String param2) {
-        FragmentCourses fragment = new FragmentCourses();
+    public static FragmentAddItemCategory newInstance(String param1, String param2) {
+        FragmentAddItemCategory fragment = new FragmentAddItemCategory();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putString(CATEGORY, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -58,7 +54,7 @@ public class FragmentCourses extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            category = getArguments().getString(CATEGORY);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -67,16 +63,21 @@ public class FragmentCourses extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview =  inflater.inflate(R.layout.activity_liste_de_course, container, false);
+        bind = FragmentAdditemCategoryBinding.inflate(inflater, container, false);
 
-        add = (Button) rootview.findViewById(R.id.AddItemCourse);
-        add.setOnClickListener(click -> {
+        bind.addButton.setOnClickListener(click -> {
+            String name = bind.nameInput.getText().toString().trim();
+            int price = Integer.parseInt(bind.priceInput.getText().toString().trim());
+            String user = FirebaseAuth.getInstance().getUid();
+
+            new Item(name, category, price, user).addToDatabase();
+
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout, new FragmentAddItemCourses());
+            fragmentTransaction.replace(R.id.frame_layout, new FragmentCategory());
             fragmentTransaction.commit();
         });
 
-        return rootview;
+        return bind.getRoot();
     }
 }

@@ -1,21 +1,20 @@
-package edu.polytech.ebudget.fragmentsFooter;
-
+package edu.polytech.ebudget;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,20 +23,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-import edu.polytech.ebudget.CategoryListAdapter;
-import edu.polytech.ebudget.FragmentAddCategory;
-import edu.polytech.ebudget.FragmentAddItemCategory;
-import edu.polytech.ebudget.R;
-import edu.polytech.ebudget.databinding.FragmentCategoryBinding;
+import edu.polytech.ebudget.databinding.FragmentAdditemCourseBinding;
 import edu.polytech.ebudget.datamodels.Category;
-import edu.polytech.ebudget.login.EmailPasswordFragment;
+import edu.polytech.ebudget.datamodels.Item;
+import edu.polytech.ebudget.fragmentsFooter.FragmentCourses;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentCategory#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentCategory extends Fragment {
+public class FragmentAddItemCourses extends Fragment implements AdapterView.OnItemSelectedListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,9 +38,10 @@ public class FragmentCategory extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private FragmentCategoryBinding binding;
+    private FragmentAdditemCourseBinding bind;
+    private String category;
 
-    public FragmentCategory() {
+    public FragmentAddItemCourses() {
         // Required empty public constructor
     }
 
@@ -59,11 +51,11 @@ public class FragmentCategory extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FirstFragment.
+     * @return A new instance of fragment FourthFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentCategory newInstance(String param1, String param2) {
-        FragmentCategory fragment = new FragmentCategory();
+    public static FragmentAddItemCourses newInstance(String param1, String param2) {
+        FragmentAddItemCourses fragment = new FragmentAddItemCourses();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -84,11 +76,7 @@ public class FragmentCategory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentCategoryBinding.inflate(inflater, container, false);
-
-        CategoryListAdapter adapter = new CategoryListAdapter(getContext(), R.layout.fragment_category); // the adapter is a member field in the activity
-        ListView lv = binding.Catlist.findViewById(R.id.Catlist);
-        lv.setAdapter(adapter);
+        bind = FragmentAdditemCourseBinding.inflate(inflater, container, false);
 
         FirebaseFirestore.getInstance().collection("categories")
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
@@ -96,35 +84,46 @@ public class FragmentCategory extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        ArrayList<Category> documents = new ArrayList();
+                        ArrayList documents = new ArrayList();
                         for (QueryDocumentSnapshot document : task.getResult()){
                             Category cat = document.toObject(Category.class);
-                            documents.add(cat);
+                            documents.add(cat.name);
                         }
 
-                        adapter.addAll(documents);
+                        ArrayAdapter array = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, documents);
+                        array.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        bind.categorySpinner.setAdapter(array);
                     }
                 });
 
-        binding.addCategoryButton.setOnClickListener(click -> {
+        bind.categorySpinner.setOnItemSelectedListener(this);
+
+        bind.addButton.setOnClickListener(click -> {
+            String name = bind.nameInput.getText().toString().trim();
+            int price = Integer.parseInt(bind.priceInput.getText().toString().trim());
+            int quantity = Integer.parseInt(bind.quantityInput.getText().toString().trim());
+            String user = FirebaseAuth.getInstance().getUid();
+
+            new Item(name, category, price, quantity, user).addToDatabase();
+
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout, new FragmentAddCategory());
-            //fragmentTransaction.addToBackStack("category");
+            fragmentTransaction.replace(R.id.frame_layout, new FragmentCourses());
             fragmentTransaction.commit();
+
+
         });
 
-        binding.addItemCategory.setOnClickListener(click -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("param1", "default");
-            FragmentAddItemCategory frag = new FragmentAddItemCategory();
-            frag.setArguments(bundle);
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout, frag);
-            fragmentTransaction.commit();
-        });
+        return bind.getRoot();
+    }
 
-        return binding.getRoot();
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        this.category = adapterView.getItemAtPosition(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        Log.e("Firebase", "No category found");
     }
 }

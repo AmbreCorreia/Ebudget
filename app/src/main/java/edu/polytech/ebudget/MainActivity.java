@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import edu.polytech.ebudget.databinding.ActivityMainBinding;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCourses;
@@ -18,6 +19,7 @@ import edu.polytech.ebudget.fragmentsFooter.FragmentStats;
 public class MainActivity extends AppCompatActivity{
 
     ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,8 @@ public class MainActivity extends AppCompatActivity{
             return true;
         });
     }
-    private void replaceFragment(Fragment fragment){
+
+    public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);

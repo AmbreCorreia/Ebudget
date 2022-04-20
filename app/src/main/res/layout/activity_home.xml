@@ -45,4 +45,14 @@
         app:layout_constraintEnd_toEndOf="@+id/progress_bar"
         app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
 
+    <Button
+        android:id="@+id/budgetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="116dp"
+        android:text="Change Budget"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

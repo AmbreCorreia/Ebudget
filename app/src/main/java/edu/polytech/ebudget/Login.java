@@ -16,7 +16,5 @@ public class Login extends AppCompatActivity {
 
         Navigation.findNavController(this, R.id.nav_host_fragment)
                 .setGraph(R.navigation.nav_graph_java);
-
     }
-
 }

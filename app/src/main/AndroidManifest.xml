@@ -21,16 +21,10 @@
             android:name=".ListExpenses"
             android:exported="false" />
         <activity
-            android:name=".ListeDeCourse"
-            android:exported="false" />
-        <activity
             android:name=".Stat"
             android:exported="false" />
         <activity
             android:name=".notifications.NotificationPage"
-            android:exported="false" />
-        <activity
-            android:name=".Category"
             android:exported="false" />
         <activity
             android:name=".Home"
