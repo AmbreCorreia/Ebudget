@@ -6,13 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,7 +27,6 @@ import edu.polytech.ebudget.FragmentAddItemCategory;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.databinding.FragmentCategoryBinding;
 import edu.polytech.ebudget.datamodels.Category;
-import edu.polytech.ebudget.login.EmailPasswordFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -86,7 +82,7 @@ public class FragmentCategory extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCategoryBinding.inflate(inflater, container, false);
 
-        CategoryListAdapter adapter = new CategoryListAdapter(getContext(), R.layout.fragment_category); // the adapter is a member field in the activity
+        CategoryListAdapter adapter = new CategoryListAdapter(getContext(), R.layout.category_list); // the adapter is a member field in the activity
         ListView lv = binding.Catlist.findViewById(R.id.Catlist);
         lv.setAdapter(adapter);
 

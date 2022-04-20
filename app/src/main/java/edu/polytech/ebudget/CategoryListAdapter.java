@@ -34,11 +34,11 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
                 v = convertView;
             }
 
-            TextView name = (TextView) v.findViewById(R.id.display_name);
-            TextView budget = (TextView) v.findViewById(R.id.display_budget);
+//            TextView name = (TextView) v.findViewById(R.id.display_name);
+//            TextView budget = (TextView) v.findViewById(R.id.display_budget);
 
-            name.setText(item.name);
-            budget.setText(item.budget);
+//            name.setText(item.name);
+//            budget.setText(item.budget);
 
             return v;
 
