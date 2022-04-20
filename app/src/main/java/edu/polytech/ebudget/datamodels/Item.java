@@ -20,27 +20,30 @@ public class Item {
     public Date date;
     public int quantity;
     public String user;
-    FirebaseFirestore database = FirebaseFirestore.getInstance();
+    public boolean isBought;
+    private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddItem";
 
     public Item(){}
 
-    public Item(String name, String category, int price, String user){
+    public Item(String name, String category, int price, String user, boolean isBought){
         this.name = name;
         this.category = category;
         this.price = price;
         this.date = new Date();
         this.quantity = 1;
         this.user = user;
+        this.isBought = isBought;
     }
 
-    public Item(String name, String category, int price, int quantity, String user){
+    public Item(String name, String category, int price, int quantity, String user, boolean isBought){
         this.name = name;
         this.category = category;
         this.price = price;
         this.date = new Date();
         this.quantity = quantity;
         this.user = user;
+        this.isBought = isBought;
     }
 
     public void addToDatabase(){
@@ -51,6 +54,7 @@ public class Item {
         item.put("date", date);
         item.put("quantity", quantity);
         item.put("user", user);
+        item.put("isBought", isBought);
 
         database.collection("items")
                 .add(item)

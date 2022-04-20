@@ -14,7 +14,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import edu.polytech.ebudget.databinding.FragmentAdditemCategoryBinding;
 import edu.polytech.ebudget.datamodels.Item;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
-import edu.polytech.ebudget.fragmentsFooter.FragmentCourses;
 
 public class FragmentAddItemCategory extends Fragment {
 
@@ -70,7 +69,7 @@ public class FragmentAddItemCategory extends Fragment {
             int price = Integer.parseInt(bind.priceInput.getText().toString().trim());
             String user = FirebaseAuth.getInstance().getUid();
 
-            new Item(name, category, price, user).addToDatabase();
+            new Item(name, category, price, user, true).addToDatabase();
 
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

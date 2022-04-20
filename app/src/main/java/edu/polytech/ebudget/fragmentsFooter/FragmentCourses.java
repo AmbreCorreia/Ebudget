@@ -2,6 +2,7 @@ package edu.polytech.ebudget.fragmentsFooter;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -11,9 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+
 import edu.polytech.ebudget.FragmentAddCategory;
 import edu.polytech.ebudget.FragmentAddItemCourses;
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.datamodels.Item;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +88,21 @@ public class FragmentCourses extends Fragment {
             fragmentTransaction.replace(R.id.frame_layout, new FragmentAddItemCourses());
             fragmentTransaction.commit();
         });
+
+        FirebaseFirestore.getInstance().collection("items")
+                .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
+                .whereEqualTo("isBought", false)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        ArrayList<Item> documents = new ArrayList();
+                        for (QueryDocumentSnapshot document : task.getResult()){
+                            Item item = document.toObject(Item.class);
+                            documents.add(item);
+                        }
+                    }
+                });
 
         return rootview;
     }
