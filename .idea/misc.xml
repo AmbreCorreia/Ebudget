@@ -3,6 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.364" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_base.xml" value="0.12715298885511653" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_category.xml" value="0.2" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_home.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_list_expenses.xml" value="0.26510416666666664" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_liste_de_course.xml" value="0.2" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_login.xml" value="0.17654508611955422" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_main.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_notification.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_profil.xml" value="0.28020833333333334" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/activity_stat.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/footer.xml" value="0.3161231884057971" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragement_category.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_addcategory.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_additem_category.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_additem_course.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_additem_home.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_category.xml" value="0.22" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_emailpassword.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_multi_factor.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_multi_factor_sign_in.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_profil.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/layout/fragment_stats.xml" value="0.1859375" />
+        <entry key="..\:/Users/Ambre_Correia/AndroidStudioProjects/Ebudget/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/emmad/Documents/cours/S6/IHM Projet/Ebudget/app/src/main/res/drawable/ic_add.xml" value="0.1" />
         <entry key="..\:/Users/emmad/Documents/cours/S6/IHM Projet/Ebudget/app/src/main/res/drawable/ic_baseline_notification_important_24.xml" value="0.1" />
         <entry key="..\:/Users/emmad/Documents/cours/S6/IHM Projet/Ebudget/app/src/main/res/drawable/ic_categories_foreground.xml" value="0.1" />
@@ -14,57 +38,17 @@
         <entry key="..\:/Users/emmad/Documents/cours/S6/IHM Projet/Ebudget/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/emmad/Documents/cours/S6/IHM Projet/Ebudget/app/src/main/res/layout/input_item_layout.xml" value="0.1" />
         <entry key="..\:/Users/emmad/Documents/cours/S6/IHM Projet/Ebudget/app/src/main/res/menu/bottom_nav_menu.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/circle.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_baseline_apps_24.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_baseline_equalizer_24.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_baseline_notification_important_24.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_categories_background.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_categories_foreground.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_category_background.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_category_foreground.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_launcher_background.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_person_background.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_person_foreground.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_profil_background.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_profil_foreground.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_statistique_background.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_statistique_foreground.xml" value="0.333" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/drawable/ic_statistiques_foreground.xml" value="0.333" />
         <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_category.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_home.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_liste_de_course.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_login.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_notification.xml" value="0.33" />
+        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_notification.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_profil.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_stat.xml" value="0.33" />
+        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/activity_stat.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/footer.xml" value="0.33" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/fragment_fifth.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/fragment_first.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/fragment_first2.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/fragment_fourth.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/fragment_second.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/fragment_second2.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/fragment_sixth.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/fragment_third.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/layout/header.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/menu/bottom_nav_menu.xml" value="0.33" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_categories.xml" value="0.196" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_categories_round.xml" value="0.196" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_category.xml" value="0.1965" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_category_round.xml" value="0.1965" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_person.xml" value="0.1965" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_person_round.xml" value="0.1965" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_profil.xml" value="0.1965" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_profil_round.xml" value="0.1965" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_statistique.xml" value="0.1965" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_statistique_round.xml" value="0.1965" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_statistiques.xml" value="0.1965" />
-        <entry key="..\:/Users/thoma/Documents/Devoirs/.POLY SOPHIA/S6/IHM/Ebudget3/app/src/main/res/mipmap-anydpi-v26/ic_statistiques_round.xml" value="0.1965" />
       </map>
     </option>
   </component>

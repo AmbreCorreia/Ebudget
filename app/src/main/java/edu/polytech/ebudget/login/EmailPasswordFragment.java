@@ -38,6 +38,7 @@ import com.google.firebase.auth.MultiFactorResolver;
 
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.databinding.FragmentEmailpasswordBinding;
+import edu.polytech.ebudget.datamodels.Category;
 
 public class EmailPasswordFragment extends BaseFragment {
 
@@ -98,6 +99,9 @@ public class EmailPasswordFragment extends BaseFragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            //create default category for the user (main category)
+                            Category category = new Category("default", 200, mAuth.getUid());
+                            category.addToDatabase();
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
