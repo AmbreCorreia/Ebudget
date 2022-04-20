@@ -1,14 +1,14 @@
-package edu.polytech.ebudget.notifications;
+package edu.polytech.ebudget.datamodels;
 
 import java.util.Date;
 
-public class MyNotification {
+public class Notification {
 
     private String categorie;
     //private Date date;
     private String description;
 
-    public MyNotification(String categorie, String description){
+    public Notification(String categorie, String description){
         this.categorie = categorie;
         //this.date = date;
         this.description = description;

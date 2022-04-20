@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.datamodels.Notification;
 
 public class Notifications extends AppCompatActivity implements INotificationAdapterListener {
 
@@ -26,7 +27,7 @@ public class Notifications extends AppCompatActivity implements INotificationAda
     }
 
     @Override
-    public void onClickNotification(MyNotification notification){
+    public void onClickNotification(Notification notification){
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setMessage("La supression sera définitive. Veuillez confirmer")
                 .setNeutralButton("Annuler", null)

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:backgroundTint="#FF80AB"
-    tools:context=".notifications.MyNotification">
+    tools:context=".datamodels.Notification">
 
     <ImageButton
         android:id="@+id/button_liste_notifs"

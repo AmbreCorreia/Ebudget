@@ -1,6 +1,8 @@
 package edu.polytech.ebudget.notifications;
 
+import edu.polytech.ebudget.datamodels.Notification;
+
 public interface INotificationAdapterListener {
-    void onClickNotification(MyNotification notification);
+    void onClickNotification(Notification notification);
 
 }
