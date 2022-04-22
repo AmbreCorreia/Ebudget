@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.databinding.ActivityHomeBinding;
+import edu.polytech.ebudget.databinding.FragmentCategoryBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +27,7 @@ public class FragmentHome extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ActivityHomeBinding binding;
 
     public FragmentHome() {
         // Required empty public constructor
@@ -61,6 +64,8 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_home, container, false);
+        binding = ActivityHomeBinding.inflate(inflater, container, false);
+
+        return binding.getRoot();
     }
 }

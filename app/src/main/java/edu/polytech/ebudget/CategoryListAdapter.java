@@ -1,23 +1,31 @@
 package edu.polytech.ebudget;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import edu.polytech.ebudget.datamodels.Category;
 
 public class CategoryListAdapter extends ArrayAdapter<Category> {
 
+    private Context context;
     private int layoutResourceId;
     private static final String LOG_TAG = "CategoryListAdapter";
 
     public CategoryListAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
         layoutResourceId = textViewResourceId;
+        this.context = context;
     }
 
     @Override
@@ -39,6 +47,18 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
 
             name.setText(item.name);
             budget.setText(String.valueOf(item.budget));
+
+            Button b = (Button) v.findViewById(R.id.buttonList);
+            b.setOnClickListener(click -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("param1", item.name);
+                FragmentInCategory frag = new FragmentInCategory();
+                frag.setArguments(bundle);
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, frag);
+                fragmentTransaction.commit();
+            });
 
             return v;
 

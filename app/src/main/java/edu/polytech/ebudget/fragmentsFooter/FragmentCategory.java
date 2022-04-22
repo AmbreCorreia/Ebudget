@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +24,6 @@ import java.util.ArrayList;
 
 import edu.polytech.ebudget.CategoryListAdapter;
 import edu.polytech.ebudget.FragmentAddCategory;
-import edu.polytech.ebudget.FragmentAddItemCategory;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.databinding.FragmentCategoryBinding;
 import edu.polytech.ebudget.datamodels.Category;
@@ -107,17 +107,6 @@ public class FragmentCategory extends Fragment {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, new FragmentAddCategory());
             //fragmentTransaction.addToBackStack("category");
-            fragmentTransaction.commit();
-        });
-
-        binding.addItemCategory.setOnClickListener(click -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("param1", "default");
-            FragmentAddItemCategory frag = new FragmentAddItemCategory();
-            frag.setArguments(bundle);
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout, frag);
             fragmentTransaction.commit();
         });
 
