@@ -2,34 +2,19 @@ package edu.polytech.ebudget.fragmentsFooter;
 
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
+import static edu.polytech.ebudget.notifications.ApplicationDemo.CHANNEL_ID;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.VectorDrawable;
-import android.os.Build;
 import android.os.Bundle;
-
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RemoteViews;
-
 import edu.polytech.ebudget.R;
-import edu.polytech.ebudget.notifications.ListeNotifications;
-import edu.polytech.ebudget.notifications.NotificationPage;
+import edu.polytech.ebudget.notifications.ApplicationDemo;
 import edu.polytech.ebudget.notifications.Notifications;
-import edu.polytech.ebudget.notifications.afterNotification;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,11 +22,7 @@ import edu.polytech.ebudget.notifications.afterNotification;
  * create an instance of this fragment.
  */
 public class FragmentNotif extends Fragment {
-    private NotificationManager notifManager;
-    private NotificationChannel notifChannel;
-    private final String chanelId = "i.apps.notifications";
-    private final String title = "Titre ma Notif";
-    private final String description = "Description notif";
+    private int notificationId = 0;
     NotificationCompat.Builder builder;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -92,42 +73,21 @@ public class FragmentNotif extends Fragment {
 
         Button btnAlert = var_inflater.findViewById(R.id.buttonAlert);
 
-        notifManager = (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
-
         btnAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("test2");
-                Intent intent = new Intent(getContext(), afterNotification.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                RemoteViews contentView = new RemoteViews(getActivity().getPackageName(), R.layout.activity_after_notification);
+                sendNotificationOnChannel("Attention!", "Vous avez dépassé votre budget...", CHANNEL_ID, NotificationCompat.PRIORITY_HIGH);
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    notifChannel = new NotificationChannel(chanelId, title, NotificationManager.IMPORTANCE_HIGH);
-                    notifChannel.enableLights(true);
-                    notifChannel.setDescription(description);
-                    notifChannel.setLightColor(Color.GREEN);
-                    notifChannel.enableVibration(false);
-                    notifManager.createNotificationChannel(notifChannel);
+            }
 
-                    builder = new NotificationCompat.Builder(getContext(), chanelId)
-                            .setContent(contentView)
-                            .setContentTitle(title)
-                            .setSmallIcon(R.drawable.ic_baseline_apps_24)
-                            //.setLargeIcon(BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_baseline_apps_24))
-                            .setContentIntent(pendingIntent);
-
-                }else {
-                    builder = new NotificationCompat.Builder(getContext())
-                            .setContent(contentView)
-                            .setSmallIcon(R.drawable.ic_baseline_apps_24)
-                            //.setLargeIcon(BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_baseline_apps_24))
-                            //.setLargeIcon(((VectorDrawable) ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.ic_baseline_apps_24, null)))
-                            .setContentIntent(pendingIntent);
-                }
-
-
-                notifManager.notify(1234, builder.build());
+            private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {
+                NotificationCompat.Builder notification = new NotificationCompat.Builder(getActivity().getApplicationContext(), channelId)
+                        .setSmallIcon(R.drawable.ic_baseline_apps_24)
+                        .setContentTitle(title)
+                        .setContentText(message)
+                        .setPriority(priority);
+                ApplicationDemo.getNotificationManager().notify(++notificationId, notification.build());
             }
         });
 
