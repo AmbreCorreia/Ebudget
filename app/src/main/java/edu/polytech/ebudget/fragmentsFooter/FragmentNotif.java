@@ -3,18 +3,34 @@ package edu.polytech.ebudget.fragmentsFooter;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 import static edu.polytech.ebudget.notifications.ApplicationDemo.CHANNEL_ID;
+
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.icu.util.Calendar;
+import android.icu.util.TimeZone;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
 import edu.polytech.ebudget.notifications.Notifications;
+import edu.polytech.ebudget.utils.CalendarHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -100,6 +116,23 @@ public class FragmentNotif extends Fragment {
                 Intent intent = new Intent(getContext(), Notifications.class);
                 startActivity(intent);
             }
+        });
+
+       /*var_inflater.findViewById(R.id.AddCAlendarEvent).setOnClickListener(click -> {
+           Intent insertCalendarIntent = new Intent(Intent.ACTION_INSERT)
+                   .setData(CalendarContract.Events.CONTENT_URI)
+                   .putExtra(CalendarContract.Events.TITLE, "budget dépassé")
+                   .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
+                   .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, Calendar.getInstance().getTimeInMillis()) // Only date part is considered when ALL_DAY is true; Same as DTSTART
+                   .putExtra(CalendarContract.EXTRA_EVENT_END_TIME,Calendar.getInstance().getTimeInMillis()+1) // Only date part is considered when ALL_DAY is true
+                   .putExtra(CalendarContract.Events.DESCRIPTION, "budget dépassé"); // Description
+
+           startActivity(insertCalendarIntent);
+
+       });*/
+
+        var_inflater.findViewById(R.id.AddCAlendarEvent).setOnClickListener(click -> {
+            CalendarHelper.addCalendarEvent(getActivity(), getContext(), "Budget dépassé");
         });
 
 
