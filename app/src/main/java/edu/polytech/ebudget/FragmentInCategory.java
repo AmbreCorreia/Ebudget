@@ -1,5 +1,6 @@
 package edu.polytech.ebudget;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import edu.polytech.ebudget.camera.CameraActivity;
 import edu.polytech.ebudget.databinding.FragmentAddcategoryBinding;
 import edu.polytech.ebudget.databinding.FragmentInCategoryBinding;
 import edu.polytech.ebudget.datamodels.Category;
@@ -69,6 +71,11 @@ public class FragmentInCategory extends Fragment {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, frag);
             fragmentTransaction.commit();
+        });
+
+        binding.buttonImage.setOnClickListener(click ->{
+            Intent intentCamera = new Intent(getActivity(), CameraActivity.class);
+            startActivity(intentCamera);
         });
 
         return binding.getRoot();
