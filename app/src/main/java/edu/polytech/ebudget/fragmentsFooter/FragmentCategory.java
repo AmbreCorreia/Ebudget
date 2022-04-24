@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-import edu.polytech.ebudget.CategoryListAdapter;
+import edu.polytech.ebudget.utils.CategoryListAdapter;
 import edu.polytech.ebudget.FragmentAddCategory;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.databinding.FragmentCategoryBinding;

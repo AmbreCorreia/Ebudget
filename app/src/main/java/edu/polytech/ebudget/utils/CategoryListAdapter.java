@@ -1,4 +1,4 @@
-package edu.polytech.ebudget;
+package edu.polytech.ebudget.utils;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import edu.polytech.ebudget.FragmentInCategory;
+import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Category;
 
 public class CategoryListAdapter extends ArrayAdapter<Category> {

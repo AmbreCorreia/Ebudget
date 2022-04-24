@@ -52,6 +52,8 @@ public class NotificationPage extends AppCompatActivity {
                             .setContent(contentView)
                             .setSmallIcon(R.drawable.ic_baseline_apps_24)
                             .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_baseline_apps_24))
+                            .setTimeoutAfter(20000)
+                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                             .setContentIntent(pendingIntent);
 
                 }else {
