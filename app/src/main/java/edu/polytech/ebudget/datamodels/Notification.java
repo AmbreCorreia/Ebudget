@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class Notification {
 
-    private String category;
+    public String category;
     private Date date;
-    private String description;
+    public String description;
     public String user;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddNotification";
@@ -51,5 +51,9 @@ public class Notification {
                 .add(notif)
                 .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+    }
+
+    public void deleteFromDatabase(){
+
     }
 }

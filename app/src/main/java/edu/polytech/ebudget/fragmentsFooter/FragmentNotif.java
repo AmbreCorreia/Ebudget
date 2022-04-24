@@ -24,11 +24,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
 import edu.polytech.ebudget.notifications.Notifications;
 import edu.polytech.ebudget.utils.CalendarHelper;
@@ -94,9 +96,13 @@ public class FragmentNotif extends Fragment {
             @Override
             public void onClick(View view) {
                 System.out.println("test2");
-                String category = ((EditText)var_inflater.findViewById(R.id.category_input)).getText().toString();
-                sendNotificationOnChannel("Attention!", "Vous avez dépassé votre budget...", CHANNEL_ID, NotificationCompat.PRIORITY_HIGH);
+                sendNotificationOnChannel("Attention!", "Vous avez dépassé votre budget...", CHANNEL_ID, NotificationCompat.PRIORITY_DEFAULT);
 
+                String category = ((EditText) var_inflater.findViewById(R.id.category_input)).getText().toString().trim();
+                String user = FirebaseAuth.getInstance().getUid();
+                String description = "Vous avez dépassé votre budget " + category;
+
+                new Notification(category, description, user).addToDatabase();
             }
 
             private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {
@@ -105,7 +111,8 @@ public class FragmentNotif extends Fragment {
                         .setSmallIcon(R.drawable.ic_baseline_apps_24)
                         .setContentTitle(title)
                         .setContentText(message)
-                        .setPriority(priority);
+                        .setPriority(priority)
+                        .setTimeoutAfter(1000);
                 System.out.println("test4");
                 ApplicationDemo.getNotificationManager().notify(++notificationId, notification.build());
                 System.out.println("notifId: " + notificationId + " notif: " + notification.toString());

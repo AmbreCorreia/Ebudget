@@ -5,7 +5,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,14 +26,15 @@ import edu.polytech.ebudget.datamodels.Notification;
 
 public class Notifications extends AppCompatActivity implements INotificationAdapterListener {
 
-    private ArrayList<Notification> notifications;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
 
         //ListeNotifications notifications = new ListeNotifications();
+        NotificationsAdapter adapter = new NotificationsAdapter(getApplicationContext(), R.layout.notif_layout);
+        ListView list = findViewById(R.id.listView);
+        list.setAdapter(adapter);
 
         FirebaseFirestore.getInstance().collection("notifications")
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
@@ -38,21 +42,24 @@ public class Notifications extends AppCompatActivity implements INotificationAda
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        notifications = new ArrayList();
+                        ArrayList<Notification> documents = new ArrayList();
                         for (QueryDocumentSnapshot document : task.getResult()){
                             Notification notif = document.toObject(Notification.class);
-                            notifications.add(notif);
+                            documents.add(notif);
                         }
+
+                        adapter.addAll(documents);
                     }
                 });
 
-        NotificationsAdapter adapter = new NotificationsAdapter(getApplicationContext(), notifications);
+        /*findViewById(R.id.delete_notif).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickNotification(adapter.getItem(1));
+            }
+        });*/
 
-        ListView list = findViewById(R.id.listView);
 
-        list.setAdapter(adapter);
-
-        adapter.addListner(this);
     }
 
 
