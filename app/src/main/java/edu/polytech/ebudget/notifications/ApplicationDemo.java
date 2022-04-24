@@ -8,12 +8,11 @@ import java.util.Objects;
 
 public class ApplicationDemo extends Application {
     public static final String CHANNEL_ID = "channel1";
+    private static NotificationManager notificationManager;
 
     public static NotificationManager getNotificationManager() {
         return notificationManager;
     }
-
-    private static NotificationManager notificationManager;
 
     @Override
     public void onCreate(){

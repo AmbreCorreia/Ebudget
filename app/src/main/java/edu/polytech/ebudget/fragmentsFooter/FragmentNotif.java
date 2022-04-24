@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -93,17 +94,21 @@ public class FragmentNotif extends Fragment {
             @Override
             public void onClick(View view) {
                 System.out.println("test2");
+                String category = ((EditText)var_inflater.findViewById(R.id.category_input)).getText().toString();
                 sendNotificationOnChannel("Attention!", "Vous avez dépassé votre budget...", CHANNEL_ID, NotificationCompat.PRIORITY_HIGH);
 
             }
 
             private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {
+                System.out.println("test3");
                 NotificationCompat.Builder notification = new NotificationCompat.Builder(getActivity().getApplicationContext(), channelId)
                         .setSmallIcon(R.drawable.ic_baseline_apps_24)
                         .setContentTitle(title)
                         .setContentText(message)
                         .setPriority(priority);
+                System.out.println("test4");
                 ApplicationDemo.getNotificationManager().notify(++notificationId, notification.build());
+                System.out.println("notifId: " + notificationId + " notif: " + notification.toString());
             }
         });
 

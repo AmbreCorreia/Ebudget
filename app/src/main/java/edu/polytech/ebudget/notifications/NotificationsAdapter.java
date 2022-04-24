@@ -23,7 +23,7 @@ public class NotificationsAdapter extends BaseAdapter {
         this.notifications = notifications;
     }
 
-    public int getCount(){ return this.notifications.size(); }
+    public int getCount(){ if(notifications==null) return 0; return this.notifications.size(); }
     public Object getItem(int position){ return this.notifications.get(position); }
     public long getItemId(int position){ return position; }
 
