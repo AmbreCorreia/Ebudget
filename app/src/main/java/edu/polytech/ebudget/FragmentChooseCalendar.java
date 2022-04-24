@@ -26,6 +26,7 @@ import java.util.Map;
 import edu.polytech.ebudget.databinding.ChoosecalendarBinding;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCourses;
 import edu.polytech.ebudget.fragmentsFooter.FragmentNotif;
+import edu.polytech.ebudget.fragmentsFooter.FragmentProfil;
 import edu.polytech.ebudget.utils.CalendarHelper;
 
 public class FragmentChooseCalendar extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -100,12 +101,19 @@ public class FragmentChooseCalendar extends Fragment implements AdapterView.OnIt
             bind.calendarspinner.setOnItemSelectedListener(this);
 
             bind.OK.setOnClickListener(click ->{
-                CalendarHelper.addCalendarEvent(getActivity(), getContext(), msg);
+                if(!msg.equals("0")) {
+                    CalendarHelper.addCalendarEvent(getActivity(), getContext(), msg);
 
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, new FragmentNotif());
-                fragmentTransaction.commit();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout, new FragmentNotif());
+                    fragmentTransaction.commit();
+                } else {
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout, new FragmentProfil());
+                    fragmentTransaction.commit();
+                }
             });
 
             return bind.getRoot();
