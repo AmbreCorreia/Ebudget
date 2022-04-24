@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Notification;
@@ -14,6 +15,7 @@ public class NotificationsAdapter extends ArrayAdapter<Notification> {
 
 
     private Context context;
+    private INotificationAdapterListener listner;
     private int layoutResourceId;
     private static final String LOG_TAG = "NotificationsAdapter";
 
@@ -43,8 +45,12 @@ public class NotificationsAdapter extends ArrayAdapter<Notification> {
             notifCategory.setText(item.category);
             notifDescription.setText(String.valueOf(item.description));
 
-            /*ImageButton b = (ImageButton) v.findViewById(R.id.delete_notif);
-            b.setOnClickListener(click -> {
+            ImageButton b = (ImageButton) v.findViewById(R.id.delete_notif);
+            b.setOnClickListener(click ->{
+                listner.onClickNotification(item);
+            });
+
+            /*b.setOnClickListener(click -> {
                 Bundle bundle = new Bundle();
                 bundle.putString("param1", item.name);
                 FragmentInCategory frag = new FragmentInCategory();
@@ -62,21 +68,9 @@ public class NotificationsAdapter extends ArrayAdapter<Notification> {
             return null;
         }
 
-        /*
-        LinearLayout layoutItem;
-        layoutItem = (LinearLayout) (convertView == null ? mInflater.inflate(R.layout.notif_layout, parent, false) : convertView);
+    }
 
-        TextView tvCategory = layoutItem.findViewById(R.id.notifCategory);
-        TextView tvDescription = layoutItem.findViewById((R.id.notifDescription));
-
-        tvCategory.setText(notifications.get(position).getCategory());
-        tvDescription.setText(notifications.get(position).getDescription());
-
-        layoutItem.setOnClickListener(click -> {
-            listner.onClickNotification(notifications.get(position));
-        });
-
-        return layoutItem;*/
-
+    public void addListner(INotificationAdapterListener listner){
+        this.listner = listner;
     }
 }

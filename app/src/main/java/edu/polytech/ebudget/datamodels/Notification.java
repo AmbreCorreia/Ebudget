@@ -4,11 +4,12 @@ import android.util.Log;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Notification {
+public class Notification implements Comparator {
 
     public String category;
     private Date date;
@@ -54,6 +55,16 @@ public class Notification {
     }
 
     public void deleteFromDatabase(){
-
+        
     }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        Notification n1 = (Notification) o1;
+        Notification n2 = (Notification) o2;
+        int stringComp =
+                n1.category.compareTo(n2.category);
+        return stringComp;
+    }
+
 }
