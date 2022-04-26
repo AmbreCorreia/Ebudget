@@ -16,7 +16,6 @@ import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
 import edu.polytech.ebudget.fragmentsFooter.FragmentHome;
 import edu.polytech.ebudget.fragmentsFooter.FragmentNotif;
 import edu.polytech.ebudget.fragmentsFooter.FragmentProfil;
-import edu.polytech.ebudget.fragmentsFooter.FragmentRetour;
 import edu.polytech.ebudget.fragmentsFooter.FragmentStats;
 
 public class MainActivity extends AppCompatActivity{
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
 
-        replaceFragment(new FragmentRetour());
+        replaceFragment(new FragmentHome());
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
