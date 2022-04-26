@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +27,8 @@ import edu.polytech.ebudget.FragmentAddItemCourses;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.datamodels.Item;
+import edu.polytech.ebudget.utils.CourseListAdapter;
+import edu.polytech.ebudget.utils.ExpenseListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,6 +92,10 @@ public class FragmentCourses extends Fragment {
             fragmentTransaction.commit();
         });
 
+        CourseListAdapter adapter = new CourseListAdapter(getContext(), R.layout.itemcourse); // the adapter is a member field in the activity
+        ListView lv = rootview.findViewById(R.id.listcourse);
+        lv.setAdapter(adapter);
+
         FirebaseFirestore.getInstance().collection("items")
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .whereEqualTo("isBought", false)
@@ -101,6 +108,8 @@ public class FragmentCourses extends Fragment {
                             Item item = document.toObject(Item.class);
                             documents.add(item);
                         }
+                        if(!documents.isEmpty()) adapter.addAll(documents);
+                        else {adapter.add(new Item("Aucun objet dans la liste", "", 0, "", false));}
                     }
                 });
 
