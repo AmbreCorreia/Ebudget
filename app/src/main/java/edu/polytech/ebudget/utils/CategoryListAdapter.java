@@ -16,11 +16,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import edu.polytech.ebudget.FragmentInCategory;
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.categories.ICategoryAdapterListner;
 import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.notifications.INotificationAdapterListener;
 
 public class CategoryListAdapter extends ArrayAdapter<Category> {
 
     private Context context;
+    private ICategoryAdapterListner listner;
     private int layoutResourceId;
     private static final String LOG_TAG = "CategoryListAdapter";
 
@@ -52,6 +55,9 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
 
             Button b = (Button) v.findViewById(R.id.buttonList);
             b.setOnClickListener(click -> {
+                listner.onClickCategory(item, position);
+
+                /*
                 Bundle bundle = new Bundle();
                 bundle.putString("param1", item.name);
                 FragmentInCategory frag = new FragmentInCategory();
@@ -60,6 +66,8 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, frag);
                 fragmentTransaction.commit();
+                 */
+
             });
 
             return v;
@@ -68,5 +76,9 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
             Log.e(LOG_TAG, "error", ex);
             return null;
         }
+    }
+
+    public void addListner(ICategoryAdapterListner listner){
+        this.listner = listner;
     }
 }

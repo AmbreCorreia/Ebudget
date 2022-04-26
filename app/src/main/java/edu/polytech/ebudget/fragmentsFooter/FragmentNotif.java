@@ -95,27 +95,27 @@ public class FragmentNotif extends Fragment {
         btnAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("test2");
                 sendNotificationOnChannel("Attention!", "Vous avez dépassé votre budget...", CHANNEL_ID, NotificationCompat.PRIORITY_DEFAULT);
 
                 String category = ((EditText) var_inflater.findViewById(R.id.category_input)).getText().toString().trim();
                 String user = FirebaseAuth.getInstance().getUid();
                 String description = "Vous avez dépassé votre budget " + category;
+                System.out.println("notifId: " + notificationId);
+                String id = String.valueOf(notificationId);
+                System.out.println("id: " + id);
 
-                new Notification(category, description, user).addToDatabase();
+                new Notification(category, description, user, id).addToDatabase();
             }
 
             private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {
-                System.out.println("test3");
+
                 NotificationCompat.Builder notification = new NotificationCompat.Builder(getActivity().getApplicationContext(), channelId)
                         .setSmallIcon(R.drawable.ic_baseline_apps_24)
                         .setContentTitle(title)
                         .setContentText(message)
                         .setPriority(priority)
-                        .setTimeoutAfter(1000);
-                System.out.println("test4");
+                        .setTimeoutAfter(2500);
                 ApplicationDemo.getNotificationManager().notify(++notificationId, notification.build());
-                System.out.println("notifId: " + notificationId + " notif: " + notification.toString());
             }
         });
 
@@ -124,7 +124,6 @@ public class FragmentNotif extends Fragment {
         btnNotifList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("test1");
                 Intent intent = new Intent(getContext(), Notifications.class);
                 startActivity(intent);
             }

@@ -47,7 +47,7 @@ public class NotificationsAdapter extends ArrayAdapter<Notification> {
 
             ImageButton b = (ImageButton) v.findViewById(R.id.delete_notif);
             b.setOnClickListener(click ->{
-                listner.onClickNotification(item);
+                listner.onClickNotification(item, position);
             });
 
             /*b.setOnClickListener(click -> {

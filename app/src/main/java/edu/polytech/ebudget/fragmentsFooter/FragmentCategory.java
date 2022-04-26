@@ -1,12 +1,18 @@
 package edu.polytech.ebudget.fragmentsFooter;
 
+import static android.content.ContentValues.TAG;
+
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +21,21 @@ import android.widget.ListView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import edu.polytech.ebudget.FragmentInCategory;
+import edu.polytech.ebudget.categories.ICategoryAdapterListner;
+import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.utils.CategoryListAdapter;
 import edu.polytech.ebudget.FragmentAddCategory;
 import edu.polytech.ebudget.R;
@@ -32,7 +47,7 @@ import edu.polytech.ebudget.datamodels.Category;
  * Use the {@link FragmentCategory#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentCategory extends Fragment {
+public class FragmentCategory extends Fragment implements ICategoryAdapterListner {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,6 +100,8 @@ public class FragmentCategory extends Fragment {
         ListView lv = binding.Catlist.findViewById(R.id.Catlist);
         lv.setAdapter(adapter);
 
+        adapter.addListner(this);
+
         FirebaseFirestore.getInstance().collection("categories")
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .get()
@@ -110,5 +127,17 @@ public class FragmentCategory extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onClickCategory(Category category, int position){
+        Bundle bundle = new Bundle();
+        bundle.putString("param1", category.name);
+        FragmentInCategory frag = new FragmentInCategory();
+        frag.setArguments(bundle);
+        FragmentManager fragmentManager = ((AppCompatActivity)getContext()).getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, frag);
+        fragmentTransaction.commit();
     }
 }
