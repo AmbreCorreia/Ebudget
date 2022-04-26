@@ -122,7 +122,6 @@ public class FragmentCategory extends Fragment implements ICategoryAdapterListne
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, new FragmentAddCategory());
-            //fragmentTransaction.addToBackStack("category");
             fragmentTransaction.commit();
         });
 

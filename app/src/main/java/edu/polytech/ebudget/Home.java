@@ -22,7 +22,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        increment = findViewById(R.id.button_incr);
+        /*increment = findViewById(R.id.button_incr);
         decrement = findViewById(R.id.button_decr);
         textviewprogress = findViewById(R.id.text_view_progress);
         progressBar = findViewById(R.id.progress_bar);
@@ -46,7 +46,7 @@ public class Home extends AppCompatActivity {
         textviewprogress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, ListExpenses.class);
+                Intent intent = new Intent(Home.this, FragmentListExpenses.class);
                 startActivity(intent);
             }
         });
@@ -55,5 +55,5 @@ public class Home extends AppCompatActivity {
     private void updateProgressBar() {
         progressBar.setProgress(progress);
         textviewprogress.setText(progress+"%");
-    }
-}
+    }*/
+}}

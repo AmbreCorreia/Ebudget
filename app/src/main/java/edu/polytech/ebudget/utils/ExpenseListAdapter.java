@@ -14,17 +14,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
+
 import edu.polytech.ebudget.FragmentInCategory;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.datamodels.Item;
 
-public class CalendarListAdapter extends ArrayAdapter<Category> {
+public class ExpenseListAdapter extends ArrayAdapter<Item> {
 
     private Context context;
     private int layoutResourceId;
-    private static final String LOG_TAG = "CategoryListAdapter";
+    private static final String LOG_TAG = "ExpenseListAdapter";
 
-    public CalendarListAdapter(Context context, int textViewResourceId) {
+    public ExpenseListAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
         layoutResourceId = textViewResourceId;
         this.context = context;
@@ -33,7 +37,7 @@ public class CalendarListAdapter extends ArrayAdapter<Category> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         try {
-            Category item = getItem(position);
+            Item item = getItem(position);
             View v = null;
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -44,23 +48,15 @@ public class CalendarListAdapter extends ArrayAdapter<Category> {
                 v = convertView;
             }
 
-            TextView name = (TextView) v.findViewById(R.id.display_name);
-            TextView budget = (TextView) v.findViewById(R.id.display_budget);
+            TextView name = (TextView) v.findViewById(R.id.itemname);
+            TextView category = (TextView) v.findViewById(R.id.itemcategory);
+            TextView price = (TextView) v.findViewById(R.id.itemprice);
+            TextView date = (TextView) v.findViewById(R.id.itemdate);
 
             name.setText(item.name);
-            budget.setText(String.valueOf(item.budget));
-
-            Button b = (Button) v.findViewById(R.id.buttonList);
-            b.setOnClickListener(click -> {
-                Bundle bundle = new Bundle();
-                bundle.putString("param1", item.name);
-                FragmentInCategory frag = new FragmentInCategory();
-                frag.setArguments(bundle);
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, frag);
-                fragmentTransaction.commit();
-            });
+            category.setText(item.category);
+            price.setText(String.valueOf(item.price));
+            date.setText(DateFormat.getDateInstance().format(item.date));
 
             return v;
 

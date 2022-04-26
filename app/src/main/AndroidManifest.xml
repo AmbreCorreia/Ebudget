@@ -27,9 +27,6 @@
             android:name=".notifications.afterNotification"
             android:exported="false" />
         <activity
-            android:name=".ListExpenses"
-            android:exported="false" />
-        <activity
             android:name=".Stat"
             android:exported="false" />
         <activity

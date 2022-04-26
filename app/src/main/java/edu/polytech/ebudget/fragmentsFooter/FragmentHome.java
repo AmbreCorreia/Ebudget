@@ -2,15 +2,26 @@ package edu.polytech.ebudget.fragmentsFooter;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import edu.polytech.ebudget.FragmentListExpenses;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.databinding.ActivityHomeBinding;
-import edu.polytech.ebudget.databinding.FragmentCategoryBinding;
+import edu.polytech.ebudget.datamodels.Category;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +39,7 @@ public class FragmentHome extends Fragment {
     private String mParam1;
     private String mParam2;
     private ActivityHomeBinding binding;
+    private Category cat;
 
     public FragmentHome() {
         // Required empty public constructor
@@ -65,6 +77,27 @@ public class FragmentHome extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = ActivityHomeBinding.inflate(inflater, container, false);
+
+        FirebaseFirestore.getInstance().collection("categories")
+                .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
+                .whereEqualTo("name", "default")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot document : task.getResult()){
+                            Category cat = document.toObject(Category.class);
+                            binding.textViewProgress.setText(String.valueOf(cat.budget));
+                        }
+                    }
+                });
+
+        binding.expenselistbutton.setOnClickListener(click -> {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, new FragmentListExpenses());
+            fragmentTransaction.commit();
+        });
 
         return binding.getRoot();
     }
