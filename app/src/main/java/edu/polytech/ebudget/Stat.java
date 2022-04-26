@@ -12,14 +12,5 @@ public class Stat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_stats);
-        returnButton();
-    }
-
-    private void returnButton(){
-        Button btn = (Button) findViewById(R.id.returnButton3);
-        btn.setOnClickListener(click ->{
-            Intent intent = new Intent(Stat.this, Home.class);
-            startActivity(intent);
-        });
     }
 }
