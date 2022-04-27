@@ -56,18 +56,6 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
             Button b = (Button) v.findViewById(R.id.buttonList);
             b.setOnClickListener(click -> {
                 listner.onClickCategory(item, position);
-
-                /*
-                Bundle bundle = new Bundle();
-                bundle.putString("param1", item.name);
-                FragmentInCategory frag = new FragmentInCategory();
-                frag.setArguments(bundle);
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, frag);
-                fragmentTransaction.commit();
-                 */
-
             });
 
             return v;
