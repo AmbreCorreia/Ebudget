@@ -67,11 +67,10 @@ public class Notification {
         notif.put("id", id);
 
 
-        database.collection("notifications")
-                .add(notif)
-                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+        database.collection("notifications").document(id)
+                .set(notif)
+                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + id))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
-
     }
 
     public static Comparator<Notification> sortByCategory = new Comparator<Notification>() {

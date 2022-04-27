@@ -24,13 +24,7 @@
             android:name=".notifications.Notifications"
             android:exported="false" />
         <activity
-            android:name=".notifications.afterNotification"
-            android:exported="false" />
-        <activity
             android:name=".Stat"
-            android:exported="false" />
-        <activity
-            android:name=".notifications.NotificationPage"
             android:exported="false" />
         <activity
             android:name=".Home"
