@@ -20,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 /*
@@ -92,26 +94,23 @@ public class Notifications extends AppCompatActivity implements INotificationAda
                 });
 
         Button okTri = (Button)findViewById(R.id.ok_tri);
-        okTri.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String typeTri = spinnerTri.getSelectedItem().toString();
-                switch(typeTri){
-                    case "Catégorie":
-                        Collections.sort(doc, Notification.sortByCategory);
-                        adapter.clear();
-                        adapter.addAll(doc);
-                        break;
+        okTri.setOnClickListener(view -> {
+            String typeTri = spinnerTri.getSelectedItem().toString();
+            switch(typeTri){
+                case "Catégorie":
+                    Collections.sort(doc, Notification.sortByCategory);
+                    adapter.clear();
+                    adapter.addAll(doc);
+                    break;
 
-                    case "Date":
-                        Collections.sort(doc, Notification.sortByDate);
-                        adapter.clear();
-                        adapter.addAll(doc);
-                        break;
+                case "Date":
+                    Collections.sort(doc, Notification.sortByDate);
+                    adapter.clear();
+                    adapter.addAll(doc);
+                    break;
 
-                    default:
-                        break;
-                }
+                default:
+                    break;
             }
         });
 
@@ -124,25 +123,38 @@ public class Notifications extends AppCompatActivity implements INotificationAda
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setMessage("La supression de : " + notification.getCategory() + ", sera définitive. Veuillez confirmer")
                 .setNeutralButton("Annuler", null)
-                .setNeutralButton("Supprimer", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        System.out.println("click sur supprimer");
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                        Query notifQuery = ref.child("notifications").child(notification.category);
-                        notifQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot notifSnapshot: snapshot.getChildren())
-                                    notifSnapshot.getRef().removeValue();
-                            }
+                .setNeutralButton("Supprimer", (dialogInterface, i) -> {
+                    System.out.println("click sur supprimer");
+                    /*DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                    Query notifQuery = ref.child("notifications").child(notification.category);
+                    notifQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot notifSnapshot: snapshot.getChildren())
+                                notifSnapshot.getRef().removeValue();
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Log.e(TAG, "onCancelled", error.toException());
-                            }
-                        });
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.e(TAG, "onCancelled", error.toException());
+                        }
+                    });*/
+
+                    FirebaseFirestore.getInstance().collection("notifications").
+                            document(notification.id)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error deleting document", e);
+                                }
+                            });
                 });
         builder.show();
     }
