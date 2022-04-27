@@ -34,7 +34,6 @@ public class Notification {
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddNotification";
 
-
     public Notification(){}
 
     public Notification(String category, String description, String user, String id){
@@ -66,7 +65,6 @@ public class Notification {
         notif.put("description", description);
         notif.put("user", user);
         notif.put("id", id);
-
 
         database.collection("notifications").document(id)
                 .set(notif)

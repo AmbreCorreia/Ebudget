@@ -125,21 +125,6 @@ public class Notifications extends AppCompatActivity implements INotificationAda
                 .setNeutralButton("Annuler", null)
                 .setNeutralButton("Supprimer", (dialogInterface, i) -> {
                     System.out.println("click sur supprimer");
-                    /*DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                    Query notifQuery = ref.child("notifications").child(notification.category);
-                    notifQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot notifSnapshot: snapshot.getChildren())
-                                notifSnapshot.getRef().removeValue();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e(TAG, "onCancelled", error.toException());
-                        }
-                    });*/
-
                     FirebaseFirestore.getInstance().collection("notifications").
                             document(notification.id)
                             .delete()
@@ -155,6 +140,7 @@ public class Notifications extends AppCompatActivity implements INotificationAda
                                     Log.w(TAG, "Error deleting document", e);
                                 }
                             });
+                    
                 });
         builder.show();
     }

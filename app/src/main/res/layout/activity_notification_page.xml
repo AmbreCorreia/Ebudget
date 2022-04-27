@@ -37,15 +37,15 @@
         android:layout_margin="40dp"
         />
 
-    <EditText
-        android:id="@+id/category_input"
+    <Spinner
+        android:id="@+id/spinner_category_notif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Enter category name"
         android:textSize="15sp"
         android:inputType="text"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="40dp"
+        />
 
 
     <TextView

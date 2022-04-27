@@ -12,6 +12,8 @@ import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
@@ -21,15 +23,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
 import edu.polytech.ebudget.notifications.Notifications;
@@ -89,17 +101,34 @@ public class FragmentNotif extends Fragment {
                              Bundle savedInstanceState) {
 
         View var_inflater = inflater.inflate(R.layout.activity_notification_page, container, false);
-
         Button btnAlert = var_inflater.findViewById(R.id.buttonAlert);
+        Spinner categorySpinner = (Spinner) var_inflater.findViewById(R.id.spinner_category_notif);
+
+        FirebaseFirestore.getInstance().collection("categories")
+                .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        ArrayList documents = new ArrayList();
+                        for (QueryDocumentSnapshot document : task.getResult()){
+                            Category cat = document.toObject(Category.class);
+                            documents.add(cat.name);
+                        }
+
+                        ArrayAdapter array = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, documents);
+                        array.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        categorySpinner.setAdapter(array);
+                    }
+                });
 
         btnAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendNotificationOnChannel("Attention!", "Vous avez dépassé votre budget...", CHANNEL_ID, NotificationCompat.PRIORITY_DEFAULT);
-
-                String category = ((EditText) var_inflater.findViewById(R.id.category_input)).getText().toString().trim();
+                String category = categorySpinner.getSelectedItem().toString();
                 String user = FirebaseAuth.getInstance().getUid();
-                String description = "Vous avez dépassé votre budget " + category;
+                String description = "Vous avez dépassé votre budget de " + category;
                 System.out.println("notifId: " + notificationId);
                 String id = String.valueOf(notificationId);
                 System.out.println("id: " + id);
