@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import edu.polytech.ebudget.MainActivity;
@@ -77,8 +78,8 @@ public class Notification {
     public static Comparator<Notification> sortByCategory = new Comparator<Notification>() {
         @Override
         public int compare(Notification o1, Notification o2) {
-            String n1 = o1.category;
-            String n2 = o2.category;
+            String n1 = o1.category.toLowerCase();
+            String n2 = o2.category.toLowerCase();
             return n1.compareTo(n2);
         }
     };
