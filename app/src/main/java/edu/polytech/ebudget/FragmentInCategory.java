@@ -1,16 +1,24 @@
 package edu.polytech.ebudget;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import edu.polytech.ebudget.camera.CameraActivity;
 import edu.polytech.ebudget.databinding.FragmentInCategoryBinding;
@@ -77,6 +85,26 @@ public class FragmentInCategory extends Fragment {
             startActivity(intentCamera);
         });
 
+        binding.deletecat.setOnClickListener(click -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                    .setMessage("La supression de : " + category.name + ", sera définitive. Veuillez confirmer")
+                    .setNeutralButton("Annuler", null)
+                    .setNeutralButton("Supprimer", (dialogInterface, i) -> {
+                        System.out.println("click sur supprimer");
+
+            FirebaseFirestore.getInstance().collection("categories").
+                    document(category.id)
+                    .delete()
+                    .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully deleted!"))
+                    .addOnFailureListener(e -> Log.w(TAG, "Error deleting document", e));
+            });
+            builder.show();
+
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, new FragmentCategory());
+            fragmentTransaction.commit();
+        });
         return binding.getRoot();
     }
 
