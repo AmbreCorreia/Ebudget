@@ -131,7 +131,8 @@ public class FragmentCategory extends Fragment implements ICategoryAdapterListne
     @Override
     public void onClickCategory(Category category, int position){
         Bundle bundle = new Bundle();
-        bundle.putString("param1", category.name);
+        bundle.putParcelable("category", category);
+        //bundle.putString("param1", category.name);
         FragmentInCategory frag = new FragmentInCategory();
         frag.setArguments(bundle);
         FragmentManager fragmentManager = ((AppCompatActivity)getContext()).getSupportFragmentManager();

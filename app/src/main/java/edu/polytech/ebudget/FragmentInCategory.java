@@ -13,17 +13,16 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.polytech.ebudget.camera.CameraActivity;
-import edu.polytech.ebudget.databinding.FragmentAddcategoryBinding;
 import edu.polytech.ebudget.databinding.FragmentInCategoryBinding;
 import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
 
 public class FragmentInCategory extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM1 = "category";
 
     // TODO: Rename and change types of parameters
-    private String category;
+    private Category category;
     private FragmentInCategoryBinding binding;
 
     public FragmentInCategory() {
@@ -50,7 +49,7 @@ public class FragmentInCategory extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            category = getArguments().getString(ARG_PARAM1);
+            category = getArguments().getParcelable(ARG_PARAM1);
         }
     }
 
@@ -60,11 +59,11 @@ public class FragmentInCategory extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentInCategoryBinding.inflate(inflater, container, false);
 
-        binding.textView3.setText(category);
+        binding.textView3.setText(category.name);
 
         binding.additemcat.setOnClickListener(click -> {
             Bundle bundle = new Bundle();
-            bundle.putString("param1", category);
+            bundle.putString("param1", category.name);
             FragmentAddItemCategory frag = new FragmentAddItemCategory();
             frag.setArguments(bundle);
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

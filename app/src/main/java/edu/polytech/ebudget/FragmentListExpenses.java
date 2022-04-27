@@ -88,6 +88,7 @@ public class FragmentListExpenses extends Fragment {
                                 Item item = document.toObject(Item.class);
                                 documents.add(item);
                             }
+                            //TODO si le tableau est vide
                             adapter.addAll(documents);
                         }
                     });
