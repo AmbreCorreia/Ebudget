@@ -140,7 +140,8 @@ public class Notifications extends AppCompatActivity implements INotificationAda
                                     Log.w(TAG, "Error deleting document", e);
                                 }
                             });
-                    
+
+
                 });
         builder.show();
     }

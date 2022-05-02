@@ -4,6 +4,7 @@ import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 import static edu.polytech.ebudget.notifications.ApplicationDemo.CHANNEL_ID;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -44,6 +45,7 @@ import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
+import edu.polytech.ebudget.notifications.ClasseQuiAppelleTout;
 import edu.polytech.ebudget.notifications.Notifications;
 import edu.polytech.ebudget.utils.CalendarHelper;
 
@@ -151,10 +153,13 @@ public class FragmentNotif extends Fragment {
 
         ImageButton btnNotifList = (ImageButton) var_inflater.findViewById(R.id.button_liste_notifs);
         btnNotifList.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), Notifications.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getContext(), Notifications.class);
+                //startActivity(intent);
+
+                ClasseQuiAppelleTout.onViewCreated(R.layout.activity_notifications);
             }
         });
 
