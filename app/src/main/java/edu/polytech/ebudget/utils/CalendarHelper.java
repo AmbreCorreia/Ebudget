@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import edu.polytech.ebudget.FragmentChooseCalendar;
 import edu.polytech.ebudget.R;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Preference;
 
 public class CalendarHelper {
@@ -95,7 +96,7 @@ public class CalendarHelper {
 
         ArrayList<Preference> pref = new ArrayList<>();
 
-        FirebaseFirestore.getInstance().collection("preferences")
+        FirebaseFirestore.getInstance().collection(FirebasePaths.preferences)
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .whereNotEqualTo("calendarID", -1)
                 .get()
@@ -110,10 +111,6 @@ public class CalendarHelper {
                         }
                         CalendarHelper.addOneEvent(activity, context, msg, pref);
                     }
-                })
-        ;
-
-
+                });
     }
-
 }

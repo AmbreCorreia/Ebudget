@@ -50,6 +50,7 @@ import java.util.Comparator;
 
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Notification;
 
 public class Notifications extends AppCompatActivity implements INotificationAdapterListener {
@@ -61,7 +62,6 @@ public class Notifications extends AppCompatActivity implements INotificationAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
 
-        //ListeNotifications notifications = new ListeNotifications();
         NotificationsAdapter adapter = new NotificationsAdapter(getApplicationContext(), R.layout.notif_layout);
         ListView list = findViewById(R.id.listView);
         list.setAdapter(adapter);
@@ -77,7 +77,7 @@ public class Notifications extends AppCompatActivity implements INotificationAda
         list.setAdapter(adapter);
         adapter.addListner(this);
 
-        FirebaseFirestore.getInstance().collection("notifications")
+        FirebaseFirestore.getInstance().collection(FirebasePaths.notifications)
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -125,36 +125,11 @@ public class Notifications extends AppCompatActivity implements INotificationAda
                 .setNeutralButton("Annuler", null)
                 .setNeutralButton("Supprimer", (dialogInterface, i) -> {
                     System.out.println("click sur supprimer");
-                    /*DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                    Query notifQuery = ref.child("notifications").child(notification.category);
-                    notifQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot notifSnapshot: snapshot.getChildren())
-                                notifSnapshot.getRef().removeValue();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e(TAG, "onCancelled", error.toException());
-                        }
-                    });*/
-
-                    FirebaseFirestore.getInstance().collection("notifications").
+                    FirebaseFirestore.getInstance().collection(FirebasePaths.notifications).
                             document(notification.id)
                             .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error deleting document", e);
-                                }
-                            });
+                            .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully deleted!"))
+                            .addOnFailureListener(e -> Log.w(TAG, "Error deleting document", e));
                 });
         builder.show();
     }

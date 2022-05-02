@@ -35,6 +35,7 @@ import java.util.ArrayList;
 
 import edu.polytech.ebudget.FragmentInCategory;
 import edu.polytech.ebudget.categories.ICategoryAdapterListner;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.utils.CategoryListAdapter;
 import edu.polytech.ebudget.FragmentAddCategory;
@@ -102,7 +103,7 @@ public class FragmentCategory extends Fragment implements ICategoryAdapterListne
 
         adapter.addListner(this);
 
-        FirebaseFirestore.getInstance().collection("categories")
+        FirebaseFirestore.getInstance().collection(FirebasePaths.categories)
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

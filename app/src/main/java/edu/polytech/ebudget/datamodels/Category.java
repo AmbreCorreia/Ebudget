@@ -14,6 +14,7 @@ public class Category implements Parcelable {
     public int budget;
     public String user;
     public String id;
+    public int expense;
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddCategory";
 
@@ -24,6 +25,7 @@ public class Category implements Parcelable {
         this.budget = budget;
         this.user = user;
         this.id = user+name;
+        this.expense = budget;
     }
 
     protected Category(Parcel in) {
@@ -31,6 +33,7 @@ public class Category implements Parcelable {
         budget = in.readInt();
         user = in.readString();
         id = in.readString();
+        expense = in.readInt();
     }
 
     public static final Creator<Category> CREATOR = new Creator<Category>() {
@@ -51,8 +54,9 @@ public class Category implements Parcelable {
         category.put("budget", budget);
         category.put("user", user);
         category.put("id", id);
+        category.put("expense", expense);
 
-        database.collection("categories").document(id)
+        database.collection(FirebasePaths.categories).document(id)
                 .set(category)
                 .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + id))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
@@ -69,5 +73,6 @@ public class Category implements Parcelable {
         parcel.writeInt(budget);
         parcel.writeString(user);
         parcel.writeString(id);
+        parcel.writeInt(expense);
     }
 }

@@ -21,6 +21,7 @@ public class Item {
     public int quantity;
     public String user;
     public boolean isBought;
+    public String id;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddItem";
 
@@ -34,6 +35,7 @@ public class Item {
         this.quantity = 1;
         this.user = user;
         this.isBought = isBought;
+        this.id = user+name+category;
     }
 
     public Item(String name, String category, int price, int quantity, String user, boolean isBought){
@@ -44,6 +46,7 @@ public class Item {
         this.quantity = quantity;
         this.user = user;
         this.isBought = isBought;
+        this.id = user+name+category;
     }
 
     public void addToDatabase(){
@@ -55,10 +58,10 @@ public class Item {
         item.put("quantity", quantity);
         item.put("user", user);
         item.put("isBought", isBought);
+        item.put("id", id);
 
-        database.collection("items")
-                .add(item)
-                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
-                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+        database.collection(FirebasePaths.items).document(id)
+                .set(item)
+                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + id));
     }
 }
