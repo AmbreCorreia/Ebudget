@@ -156,10 +156,11 @@ public class FragmentNotif extends Fragment {
 
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(getContext(), Notifications.class);
-                //startActivity(intent);
+                Intent intent = new Intent(getContext(), Notifications.class);
+                startActivity(intent);
 
-                ClasseQuiAppelleTout.onViewCreated(R.layout.activity_notifications);
+                //ClasseQuiAppelleTout.onViewCreated(R.layout.activity_notifications);
+                //((ClasseQuiAppelleTout)getApplication()).onViewCreated(  findViewById(R.id.activity_notifications) );
             }
         });
 

@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.polytech.ebudget.databinding.ChoosecalendarBinding;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCourses;
 import edu.polytech.ebudget.fragmentsFooter.FragmentNotif;
 import edu.polytech.ebudget.fragmentsFooter.FragmentProfil;
@@ -126,7 +127,7 @@ public class FragmentChooseCalendar extends Fragment implements AdapterView.OnIt
             Map<String, Object> data = new HashMap<>();
             data.put("calendarID", calID);
 
-            FirebaseFirestore.getInstance().collection("preferences").document(FirebaseAuth.getInstance().getUid())
+            FirebaseFirestore.getInstance().collection(FirebasePaths.preferences).document(FirebaseAuth.getInstance().getUid())
                     .set(data, SetOptions.merge());
         }
 

@@ -10,8 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.polytech.ebudget.databinding.FragmentAdditemCategoryBinding;
+import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Item;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
 
@@ -23,7 +30,7 @@ public class FragmentAddItemCategory extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String category;
+    private Category category;
     private String mParam2;
     private FragmentAdditemCategoryBinding bind;
 
@@ -53,7 +60,9 @@ public class FragmentAddItemCategory extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            category = getArguments().getString(CATEGORY);
+            if (getArguments() != null) {
+                category = getArguments().getParcelable(CATEGORY);
+            }
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -69,7 +78,13 @@ public class FragmentAddItemCategory extends Fragment {
             int price = Integer.parseInt(bind.priceInput.getText().toString().trim());
             String user = FirebaseAuth.getInstance().getUid();
 
-            new Item(name, category, price, user, true).addToDatabase();
+            new Item(name, category.name, price, user, true).addToDatabase();
+
+            //update category expense
+            Map<String, Object> data = new HashMap<>();
+            data.put("expense", category.expense - price);
+            FirebaseFirestore.getInstance().collection(FirebasePaths.categories).document(category.id)
+                    .set(data, SetOptions.merge());
 
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

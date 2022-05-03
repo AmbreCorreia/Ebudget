@@ -19,6 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 import edu.polytech.ebudget.databinding.FragmentlistexpenseBinding;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Item;
 import edu.polytech.ebudget.utils.ExpenseListAdapter;
 
@@ -76,7 +77,7 @@ public class FragmentListExpenses extends Fragment {
             ListView lv = binding.ExpenseList.findViewById(R.id.ExpenseList);
             lv.setAdapter(adapter);
 
-            FirebaseFirestore.getInstance().collection("items")
+            FirebaseFirestore.getInstance().collection(FirebasePaths.items)
                     .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                     .whereEqualTo("isBought", true)
                     .get()

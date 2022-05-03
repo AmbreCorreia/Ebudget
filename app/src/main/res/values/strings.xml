@@ -3,6 +3,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="auth_failed">Authentication failed</string>
+    <string name="F_CATEGORIES">categories</string>
+    <string name="F_ITEMS">items</string>
+    <string name="F_NOTIFICATIONS">notifications</string>
+    <string name="F_PREFERENCES">preferences</string>
 
     <string-array name="items">
         <item>Tomates</item>

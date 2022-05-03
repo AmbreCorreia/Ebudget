@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.polytech.ebudget.datamodels.FirebasePaths;
+
 public class NotifPhone implements INotification{
     String description;
     String user;
@@ -42,7 +44,7 @@ public class NotifPhone implements INotification{
         notif.put("user", user);
 
 
-        database.collection("notifications")
+        database.collection(FirebasePaths.notifications)
                 .add(notif)
                 .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));

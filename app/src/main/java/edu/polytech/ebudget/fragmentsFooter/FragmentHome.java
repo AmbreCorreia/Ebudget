@@ -22,6 +22,7 @@ import edu.polytech.ebudget.FragmentListExpenses;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.databinding.ActivityHomeBinding;
 import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,7 +79,7 @@ public class FragmentHome extends Fragment {
         // Inflate the layout for this fragment
         binding = ActivityHomeBinding.inflate(inflater, container, false);
 
-        FirebaseFirestore.getInstance().collection("categories")
+        FirebaseFirestore.getInstance().collection(FirebasePaths.categories)
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .whereEqualTo("name", "default")
                 .get()

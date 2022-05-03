@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,13 +21,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.polytech.ebudget.FragmentAddCategory;
 import edu.polytech.ebudget.FragmentAddItemCourses;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Item;
 import edu.polytech.ebudget.utils.CourseListAdapter;
 import edu.polytech.ebudget.utils.ExpenseListAdapter;
@@ -46,6 +52,7 @@ public class FragmentCourses extends Fragment {
     private String mParam1;
     private String mParam2;
     private Button add;
+    private FirebaseFirestore db =  FirebaseFirestore.getInstance();
 
     public FragmentCourses() {
         // Required empty public constructor
@@ -94,9 +101,10 @@ public class FragmentCourses extends Fragment {
 
         CourseListAdapter adapter = new CourseListAdapter(getContext(), R.layout.itemcourse); // the adapter is a member field in the activity
         ListView lv = rootview.findViewById(R.id.listcourse);
+        lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         lv.setAdapter(adapter);
 
-        FirebaseFirestore.getInstance().collection("items")
+        FirebaseFirestore.getInstance().collection(FirebasePaths.items)
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .whereEqualTo("isBought", false)
                 .get()
@@ -112,6 +120,39 @@ public class FragmentCourses extends Fragment {
                         else {adapter.add(new Item("Aucun objet dans la liste", "", 0, "", false));}
                     }
                 });
+
+        rootview.findViewById(R.id.buyButton).setOnClickListener(click -> {
+            //iterate on list items
+            for (int i = 0; i < lv.getCount(); i++) {
+                CheckBox checkbox = (CheckBox) lv.getChildAt(i).findViewById(R.id.checkBox);
+                if (checkbox.isChecked()) {
+                    Item item = (Item) lv.getAdapter().getItem(i);
+                    //update isBought of the item
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("isBought", true);
+                    db.collection(FirebasePaths.items).document(item.id)
+                            .set(data, SetOptions.merge());
+
+                    //update category expense
+                    FirebaseFirestore.getInstance().collection(FirebasePaths.categories)
+                            .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
+                            .whereEqualTo("name", item.category)
+                            .get()
+                            .addOnCompleteListener(task -> {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Category category = document.toObject(Category.class);
+
+                                    Map<String, Object> cat = new HashMap<>();
+                                    cat.put("expense", category.expense - item.price * item.quantity);
+                                    FirebaseFirestore.getInstance().collection(FirebasePaths.categories).document(category.id)
+                                            .set(cat, SetOptions.merge());
+                                }
+                            });
+                }
+            }
+            //trying to refresh
+            //getParentFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        });
 
         return rootview;
     }

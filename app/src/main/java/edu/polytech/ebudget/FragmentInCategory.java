@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import edu.polytech.ebudget.camera.CameraActivity;
 import edu.polytech.ebudget.databinding.FragmentInCategoryBinding;
 import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
 
 public class FragmentInCategory extends Fragment {
@@ -71,7 +72,7 @@ public class FragmentInCategory extends Fragment {
 
         binding.additemcat.setOnClickListener(click -> {
             Bundle bundle = new Bundle();
-            bundle.putString("param1", category.name);
+            bundle.putParcelable("category", category);
             FragmentAddItemCategory frag = new FragmentAddItemCategory();
             frag.setArguments(bundle);
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -92,18 +93,18 @@ public class FragmentInCategory extends Fragment {
                     .setNeutralButton("Supprimer", (dialogInterface, i) -> {
                         System.out.println("click sur supprimer");
 
-            FirebaseFirestore.getInstance().collection("categories").
+            FirebaseFirestore.getInstance().collection(FirebasePaths.categories).
                     document(category.id)
                     .delete()
                     .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully deleted!"))
                     .addOnFailureListener(e -> Log.w(TAG, "Error deleting document", e));
-            });
-            builder.show();
 
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, new FragmentCategory());
             fragmentTransaction.commit();
+            });
+            builder.show();
         });
         return binding.getRoot();
     }

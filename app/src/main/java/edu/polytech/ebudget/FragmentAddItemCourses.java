@@ -17,14 +17,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.polytech.ebudget.databinding.FragmentAdditemCourseBinding;
 import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Item;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCourses;
 
@@ -39,7 +44,7 @@ public class FragmentAddItemCourses extends Fragment implements AdapterView.OnIt
     private String mParam1;
     private String mParam2;
     private FragmentAdditemCourseBinding bind;
-    private String category;
+    private Category category;
 
     public FragmentAddItemCourses() {
         // Required empty public constructor
@@ -78,22 +83,19 @@ public class FragmentAddItemCourses extends Fragment implements AdapterView.OnIt
         // Inflate the layout for this fragment
         bind = FragmentAdditemCourseBinding.inflate(inflater, container, false);
 
-        FirebaseFirestore.getInstance().collection("categories")
+        FirebaseFirestore.getInstance().collection(FirebasePaths.categories)
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        ArrayList documents = new ArrayList();
-                        for (QueryDocumentSnapshot document : task.getResult()){
-                            Category cat = document.toObject(Category.class);
-                            documents.add(cat.name);
-                        }
-
-                        ArrayAdapter array = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, documents);
-                        array.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        bind.categorySpinner.setAdapter(array);
+                .addOnCompleteListener(task -> {
+                    ArrayList documents = new ArrayList();
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        Category cat = document.toObject(Category.class);
+                        documents.add(cat.name);
                     }
+
+                    ArrayAdapter array = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, documents);
+                    array.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    bind.categorySpinner.setAdapter(array);
                 });
 
         bind.categorySpinner.setOnItemSelectedListener(this);
@@ -104,14 +106,12 @@ public class FragmentAddItemCourses extends Fragment implements AdapterView.OnIt
             int quantity = Integer.parseInt(bind.quantityInput.getText().toString().trim());
             String user = FirebaseAuth.getInstance().getUid();
 
-            new Item(name, category, price, quantity, user, false).addToDatabase();
+            new Item(name, category.name, price, quantity, user, false).addToDatabase();
 
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, new FragmentCourses());
             fragmentTransaction.commit();
-
-
         });
 
         return bind.getRoot();
@@ -119,7 +119,16 @@ public class FragmentAddItemCourses extends Fragment implements AdapterView.OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        this.category = adapterView.getItemAtPosition(i).toString();
+        String catName = adapterView.getItemAtPosition(i).toString();
+        FirebaseFirestore.getInstance().collection(FirebasePaths.categories)
+                .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
+                .whereEqualTo("name", catName)
+                .get()
+                .addOnCompleteListener(task -> {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        category = document.toObject(Category.class);
+                    }
+                });
     }
 
     @Override
