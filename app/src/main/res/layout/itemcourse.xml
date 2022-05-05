@@ -7,22 +7,47 @@
 
     <TextView
         android:id="@+id/itemlistcourse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemlisteprice"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="32dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/itemcoursequantity"
+        app:layout_constraintStart_toEndOf="@+id/itemcoursequantity"
+        app:layout_constraintTop_toTopOf="@+id/itemcoursequantity"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/itemcoursequantity"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="32dp"
+        android:text="TextView"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/itemlistcourse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toEndOf="@+id/itemlistcourse"
         app:layout_constraintTop_toTopOf="@+id/itemlistcourse"
-        app:layout_constraintVertical_bias="0.413" />
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

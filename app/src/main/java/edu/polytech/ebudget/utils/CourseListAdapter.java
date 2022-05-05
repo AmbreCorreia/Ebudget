@@ -39,7 +39,12 @@ public class CourseListAdapter extends ArrayAdapter<Item> {
             }
 
             TextView name = (TextView) v.findViewById(R.id.itemlistcourse);
+            TextView price = (TextView) v.findViewById(R.id.itemlisteprice);
+            TextView quantity = (TextView) v.findViewById(R.id.itemcoursequantity);
+
             name.setText(item.name);
+            price.setText(String.valueOf(item.price*item.quantity)+"€");
+            quantity.setText(String.valueOf(item.quantity)+"x");
 
             return v;
 
