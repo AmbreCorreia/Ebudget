@@ -1,5 +1,6 @@
 package edu.polytech.ebudget.fragmentsFooter;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -150,6 +152,7 @@ public class FragmentCourses extends Fragment {
                             });
                 }
             }
+            Toast.makeText(getContext(),"Confirmed!", Toast.LENGTH_SHORT).show();
             this.refresh();
         });
 
@@ -157,8 +160,12 @@ public class FragmentCourses extends Fragment {
     }
 
     private void refresh(){
-        //trying to refresh
-        //marche pas
-        getParentFragmentManager().beginTransaction().detach(FragmentCourses.this).attach(FragmentCourses.this).commit();
+        FragmentManager fragmentManager = getParentFragmentManager();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            fragmentManager.beginTransaction().detach(this).commitNow();
+            fragmentManager.beginTransaction().attach(this).commitNow();
+        } else {
+            fragmentManager.beginTransaction().detach(this).attach(this).commit();
+        }
     }
 }

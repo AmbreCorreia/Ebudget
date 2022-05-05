@@ -32,7 +32,7 @@ public class Preference {
         preference.put("notificationEnabled", notifictionEnabled);
         preference.put("calendarID", calendarID);
 
-        database.collection(FirebasePaths.preferences).document(FirebaseAuth.getInstance().getUid())
+        database.collection(FirebasePaths.preferences).document(user)
                 .set(preference)
                 .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
