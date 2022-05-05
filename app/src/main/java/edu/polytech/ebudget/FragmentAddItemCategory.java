@@ -1,6 +1,7 @@
 package edu.polytech.ebudget;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,8 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.firebase.ui.auth.data.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
@@ -20,6 +27,8 @@ import edu.polytech.ebudget.databinding.FragmentAdditemCategoryBinding;
 import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Item;
+import edu.polytech.ebudget.datamodels.Notification;
+import edu.polytech.ebudget.datamodels.Preference;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
 
 public class FragmentAddItemCategory extends Fragment {
@@ -78,13 +87,16 @@ public class FragmentAddItemCategory extends Fragment {
             int price = Integer.parseInt(bind.priceInput.getText().toString().trim());
             String user = FirebaseAuth.getInstance().getUid();
 
-            new Item(name, category.name, price, user, true).addToDatabase();
+            Item item = new Item(name, category.name, price, user, true);
+            item.addToDatabase();
 
             //update category expense
             Map<String, Object> data = new HashMap<>();
             data.put("expense", category.expense + price);
             FirebaseFirestore.getInstance().collection(FirebasePaths.categories).document(category.id)
                     .set(data, SetOptions.merge());
+
+            //this.check(category, item, user);
 
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -93,5 +105,32 @@ public class FragmentAddItemCategory extends Fragment {
         });
 
         return bind.getRoot();
+    }
+
+    private void check(Category category, Item item, String user){
+        FirebaseFirestore.getInstance().collection(FirebasePaths.preferences)
+                .whereEqualTo("user", user)
+                .get()
+                .addOnCompleteListener(task -> {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Preference pref = document.toObject(Preference.class);
+                        if(pref.notifictionEnabled){
+                            FirebaseFirestore.getInstance().collection(FirebasePaths.notifications)
+                                    .whereEqualTo("user", user)
+                                    .whereEqualTo("category", category.name)
+                                    .get()
+                                    .addOnCompleteListener(task1 -> {
+                                        for(QueryDocumentSnapshot notif : task1.getResult()){
+                                            Notification notification = notif.toObject(Notification.class);
+                                            int actual = (int) ((float)(category.expense*100)/ (float)category.budget);
+                                            int future = (int) ((float)((category.expense + item.price*item.quantity)*100)/ (float)category.budget);
+                                            if(actual < notification.threshold && future > notification.threshold){
+                                                //TODO send notification
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
     }
 }

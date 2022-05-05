@@ -31,11 +31,13 @@ public class Notification {
     public String description;
     public String user;
     public String id;
+    public int threshold;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddNotification";
 
     public Notification(){}
 
+    //TODO ajouter threshold
     public Notification(String category, String description, String user, String id){
         this.category = category;
         this.date = new Date();
