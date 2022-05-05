@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,9 +50,14 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
 
             TextView name = (TextView) v.findViewById(R.id.display_name);
             TextView budget = (TextView) v.findViewById(R.id.display_budget);
+            TextView percent = (TextView) v.findViewById(R.id.text_view_progress_category);
+            ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.progress_bar_category);
 
             name.setText(item.name);
             budget.setText(String.valueOf(item.budget));
+            int progress = (int) ((float)(item.expense*100)/ (float)item.budget);
+            percent.setText(String.valueOf(progress)+"%");
+            progressBar.setProgress(progress);
 
             Button b = (Button) v.findViewById(R.id.buttonList);
             b.setOnClickListener(click -> {

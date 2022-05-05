@@ -25,7 +25,7 @@ public class Category implements Parcelable {
         this.budget = budget;
         this.user = user;
         this.id = user+name;
-        this.expense = budget;
+        this.expense = 0;
     }
 
     protected Category(Parcel in) {

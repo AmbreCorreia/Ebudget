@@ -89,6 +89,8 @@ public class FragmentHome extends Fragment {
                         for (QueryDocumentSnapshot document : task.getResult()){
                             Category cat = document.toObject(Category.class);
                             binding.textViewProgress.setText(String.valueOf(cat.budget));
+                            int progress = (int) ((float)(cat.expense*100)/ (float)cat.budget);
+                            binding.progressBar.setProgress(progress);
                         }
                     }
                 });

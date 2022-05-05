@@ -82,7 +82,7 @@ public class FragmentAddItemCategory extends Fragment {
 
             //update category expense
             Map<String, Object> data = new HashMap<>();
-            data.put("expense", category.expense - price);
+            data.put("expense", category.expense + price);
             FirebaseFirestore.getInstance().collection(FirebasePaths.categories).document(category.id)
                     .set(data, SetOptions.merge());
 

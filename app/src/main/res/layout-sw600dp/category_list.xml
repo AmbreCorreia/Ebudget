@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ProgressBar
-        android:id="@+id/progress_bar_fruits"
+        android:id="@+id/progress_bar_category"
         style="@style/CircularDeterminateProgressBar"
         android:layout_width="117dp"
         android:layout_height="108dp"
@@ -17,14 +17,14 @@
         tools:progress="60" />
 
     <TextView
-        android:id="@+id/text_view_progress_fruits"
+        android:id="@+id/text_view_progress_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_fruits"
-        app:layout_constraintEnd_toEndOf="@+id/progress_bar_fruits"
-        app:layout_constraintStart_toStartOf="@+id/progress_bar_fruits"
-        app:layout_constraintTop_toTopOf="@+id/progress_bar_fruits"
+        app:layout_constraintBottom_toBottomOf="@+id/progress_bar_category"
+        app:layout_constraintEnd_toEndOf="@+id/progress_bar_category"
+        app:layout_constraintStart_toStartOf="@+id/progress_bar_category"
+        app:layout_constraintTop_toTopOf="@+id/progress_bar_category"
         tools:text="60%" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_marginTop="68dp"
         android:text="TextView"
         android:textSize="30dp"
-        app:layout_constraintStart_toEndOf="@+id/progress_bar_fruits"
+        app:layout_constraintStart_toEndOf="@+id/progress_bar_category"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

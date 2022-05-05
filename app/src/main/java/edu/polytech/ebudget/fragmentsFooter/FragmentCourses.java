@@ -143,17 +143,22 @@ public class FragmentCourses extends Fragment {
                                     Category category = document.toObject(Category.class);
 
                                     Map<String, Object> cat = new HashMap<>();
-                                    cat.put("expense", category.expense - item.price * item.quantity);
+                                    cat.put("expense", category.expense + item.price * item.quantity);
                                     FirebaseFirestore.getInstance().collection(FirebasePaths.categories).document(category.id)
                                             .set(cat, SetOptions.merge());
                                 }
                             });
                 }
             }
-            //trying to refresh
-            //getParentFragmentManager().beginTransaction().detach(this).attach(this).commit();
+            this.refresh();
         });
 
         return rootview;
+    }
+
+    private void refresh(){
+        //trying to refresh
+        //marche pas
+        getParentFragmentManager().beginTransaction().detach(FragmentCourses.this).attach(FragmentCourses.this).commit();
     }
 }
