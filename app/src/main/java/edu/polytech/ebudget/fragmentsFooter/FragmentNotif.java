@@ -17,6 +17,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
@@ -29,6 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -41,12 +44,15 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import edu.polytech.ebudget.FragmentAddCategory;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
 import edu.polytech.ebudget.notifications.ClasseQuiAppelleTout;
 import edu.polytech.ebudget.notifications.Notifications;
+import edu.polytech.ebudget.notifications.mvc.FragmentListeNotif;
+import edu.polytech.ebudget.notifications.mvc.NotificationModel;
 import edu.polytech.ebudget.utils.CalendarHelper;
 
 /**
@@ -124,6 +130,11 @@ public class FragmentNotif extends Fragment {
                     }
                 });
 
+        SeekBar seekBar = (SeekBar)var_inflater.findViewById(R.id.seekBar);
+        seekBar.setMax(100);
+        seekBar.setMin(0);
+        int threshold = seekBar.getProgress() / 100;
+
         btnAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,7 +146,15 @@ public class FragmentNotif extends Fragment {
                 String id = String.valueOf(notificationId);
                 System.out.println("id: " + id);
 
-                new Notification(category, description, user, id).addToDatabase();
+                //new Notification(category, description, user, id).addToDatabase();
+                NotificationModel newNotif  = new NotificationModel(null);
+                newNotif.setId(id);
+                newNotif.setUser(user);
+                newNotif.setDescription(description);
+                newNotif.setCategory(category);
+                newNotif.setThreshold(threshold);
+                newNotif.addToDatabase();
+
             }
 
             private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {
@@ -153,14 +172,18 @@ public class FragmentNotif extends Fragment {
 
         ImageButton btnNotifList = (ImageButton) var_inflater.findViewById(R.id.button_liste_notifs);
         btnNotifList.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), Notifications.class);
+                /*Intent intent = new Intent(getContext(), Notifications.class);
                 startActivity(intent);
+                 */
 
-                //ClasseQuiAppelleTout.onViewCreated(R.layout.activity_notifications);
-                //((ClasseQuiAppelleTout)getApplication()).onViewCreated(  findViewById(R.id.activity_notifications) );
+                //ClasseQuiAppelleTout.onViewCreated(var_inflater.findViewById(R.id.view_notifications));
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, new FragmentListeNotif());
+                fragmentTransaction.commit();
             }
         });
 
@@ -180,7 +203,6 @@ public class FragmentNotif extends Fragment {
         var_inflater.findViewById(R.id.AddCAlendarEvent).setOnClickListener(click -> {
             CalendarHelper.addCalendarEvent(getActivity(), getContext(), "Budget dépassé");
         });
-
 
         // Inflate the layout for this fragment
         return var_inflater;

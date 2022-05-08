@@ -1,6 +1,4 @@
-package edu.polytech.ebudget.notifications;
-
-import edu.polytech.ebudget.datamodels.Notification;
+package edu.polytech.ebudget.notifications.mvc;
 
 public interface IViewClick {
     void onClickNotification(NotificationModel notification, int position);

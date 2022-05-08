@@ -1,7 +1,6 @@
-package edu.polytech.ebudget.notifications;
+package edu.polytech.ebudget.notifications.mvc;
 
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
@@ -9,26 +8,22 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
-
-import edu.polytech.ebudget.datamodels.Notification;
 
 public class NotificationModel extends Observable {
     private final String TAG = "notifications " + getClass().getSimpleName();
     public FirebaseFirestore database = FirebaseFirestore.getInstance();
-    public String category;
-    private Date date;
-    public String description;
-    public String user;
-    public String id;
-
-    private NotificationController controller;
+    public String category = "";
+    private Date date = new Date();
+    public String description = "";
+    public String user = "";
+    public String id = "";
+    public int threshold = 0;
+    private NotificationController controller = null;
 
     public void setController(NotificationController controller) {
         this.controller = controller;
@@ -36,11 +31,32 @@ public class NotificationModel extends Observable {
 
     public NotificationModel(NotificationController controller){
         super();
+        this.date = new Date();
         this.controller = controller;
         Log.d(TAG, "Model is created");
     }
 
-    private void addToDatabase(){
+    public NotificationModel(){
+
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public void setUser(String user) {
+        this.user = user;
+    }
+    public void setThreshold(int threshold) {
+        this.threshold = threshold;
+    }
+
+    public void addToDatabase(){
         Map<String, Object> notif = new HashMap<>();
         notif.put("category", category);
         notif.put("date", new Date());
@@ -77,11 +93,10 @@ public class NotificationModel extends Observable {
         notifyObservers();
     }
 
-/*
+
     public static Comparator<NotificationModel> sortByCategory = new Comparator<NotificationModel>() {
         @Override
         public int compare(NotificationModel o1, NotificationModel o2) {
-            o1.database.collection("notifications").whereEqualTo("")
             String n1 = o1.category.toLowerCase();
             String n2 = o2.category.toLowerCase();
             return n1.compareTo(n2);
@@ -97,5 +112,4 @@ public class NotificationModel extends Observable {
         }
     };
 
- */
 }
