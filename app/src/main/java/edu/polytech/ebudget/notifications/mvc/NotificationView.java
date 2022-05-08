@@ -57,8 +57,8 @@ public class NotificationView implements Observer{
     @Override
     public void update(Observable observable, Object o) {
         NotificationModel model = (NotificationModel) observable;
-        if (!modelCreated) {
-            adapter.updateModel(model);
+        if (observable.hasChanged()) {
+            //adapter.updateModel(model);
             ListView list = view.findViewById(R.id.listView);
             list.setAdapter(adapter);
 

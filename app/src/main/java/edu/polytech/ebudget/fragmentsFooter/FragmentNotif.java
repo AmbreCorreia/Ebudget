@@ -33,6 +33,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,12 +42,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.polytech.ebudget.FragmentAddCategory;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Category;
+import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
 import edu.polytech.ebudget.notifications.ClasseQuiAppelleTout;
@@ -134,6 +139,12 @@ public class FragmentNotif extends Fragment {
         seekBar.setMax(100);
         seekBar.setMin(0);
         int threshold = seekBar.getProgress() / 100;
+
+        Switch notifEnabled = (Switch)var_inflater.findViewById(R.id.switchNotifs);
+        Map<String, Object> data = new HashMap<>();
+        data.put("notificationEnabled", notifEnabled.isChecked());
+        FirebaseFirestore.getInstance().collection(FirebasePaths.preferences).document(FirebaseAuth.getInstance().getUid())
+                .set(data, SetOptions.merge());
 
         btnAlert.setOnClickListener(new View.OnClickListener() {
             @Override
