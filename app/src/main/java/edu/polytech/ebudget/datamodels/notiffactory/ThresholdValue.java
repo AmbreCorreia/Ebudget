@@ -1,21 +1,24 @@
 package edu.polytech.ebudget.datamodels.notiffactory;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ThresholdValue implements IThreshold{
+public class ThresholdValue implements IThreshold, Serializable {
     private int value;
     private String category;
-    private Date date;
 
     ThresholdValue(int val, String category){
         this.value = val;
+        this.category = category;
     }
 
-    @Override
     public boolean isReached() {
-        //check if category's value is higher than threshold
-        //update date if date is null
+        //currently checked externaly
         return false;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
@@ -23,8 +26,7 @@ public class ThresholdValue implements IThreshold{
         return category;
     }
 
-    @Override
-    public Date firstReached() {
-        return date;
+    public int getValue(){
+        return value;
     }
 }

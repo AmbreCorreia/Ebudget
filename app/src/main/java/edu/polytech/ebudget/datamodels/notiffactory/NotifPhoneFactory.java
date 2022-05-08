@@ -1,25 +1,22 @@
 package edu.polytech.ebudget.datamodels.notiffactory;
 
-import android.util.Log;
-
 import java.util.Date;
+
+import edu.polytech.ebudget.notifications.mvc.NotificationController;
 
 public class NotifPhoneFactory extends AbstractNotifFactory{
 
-
-    @Override
-    IThreshold createThreshold(Date date, String category) {
-        Log.i("Factory","NotifPhoneFactory shouldn't receive a Date");
-        return null;
+    public NotifPhone createNotification(NotificationController controller, String category, String description, String id, String user, int threshold) {
+        return new NotifPhone(controller, description, id, user, new ThresholdValue(threshold, category));
     }
 
-    @Override
-    IThreshold createThreshold(int value, String category) {
-        return null;
+    public NotifPhoneImage createNotification(NotificationController controller, String category, String description, String id, String user, int threshold, boolean image) {
+        //no matter the boolean value we create a NotifPhoneImage
+        return new NotifPhoneImage(controller, description, id, user, new ThresholdValue(threshold, category));
     }
 
-    @Override
-    INotification createNotification(String description, String user, IThreshold threshold) {
-        return new NotifPhone(description,user,threshold);
+    public NotifCalendar createNotification(NotificationController controller, String category, String description, String id, String user, Date threshold) {
+        //shouldn't be called
+        return null;
     }
 }

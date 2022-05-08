@@ -1,5 +1,7 @@
 package edu.polytech.ebudget.datamodels.notiffactory;
 
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -16,11 +18,14 @@ import java.util.Map;
 import java.util.Observable;
 
 import edu.polytech.ebudget.R;
-import edu.polytech.ebudget.datamodels.Notification;
+import edu.polytech.ebudget.datamodels.notiffactory.INotification;
+import edu.polytech.ebudget.datamodels.notiffactory.IThreshold;
+import edu.polytech.ebudget.datamodels.notiffactory.ThresholdValue;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
 import edu.polytech.ebudget.notifications.mvc.NotificationController;
+import edu.polytech.ebudget.notifications.mvc.NotificationModel;
 
-public class NotifPhone extends Observable implements INotification {
+public class NotifPhoneImage extends Observable implements INotification {
     private final String TAG = "notifications " + getClass().getSimpleName();
     public FirebaseFirestore database = FirebaseFirestore.getInstance();
     private Date date = new Date();
@@ -32,17 +37,17 @@ public class NotifPhone extends Observable implements INotification {
 
 
 
-    public NotifPhone(NotificationController controller){
+    public NotifPhoneImage(NotificationController controller){
         super();
         this.date = new Date();
         this.controller = controller;
         Log.d(TAG, "Model is created");
     }
 
-    public NotifPhone(){
+    public NotifPhoneImage(){
     }
 
-    public NotifPhone(NotificationController controller, String description, String id, String user, ThresholdValue threshold){
+    public NotifPhoneImage(NotificationController controller, String description, String id, String user, ThresholdValue threshold){
         this.controller = controller;
         this.description = description;
         this.id = id;
@@ -80,7 +85,6 @@ public class NotifPhone extends Observable implements INotification {
         notif.put("description", description);
         notif.put("user", user);
         notif.put("id", id);
-        notif.put("threshold", threshold);
 
         database.collection("notifications").document(id)
                 .set(notif)
@@ -89,6 +93,16 @@ public class NotifPhone extends Observable implements INotification {
 
         setChanged();
         notifyObservers();
+    }
+
+    public void sendNotif(NotificationCompat.Builder notification, int notificationId, Resources ressources, int image) {
+        notification.setSmallIcon(R.drawable.ic_baseline_apps_24)
+                .setContentTitle("Attention!")
+                .setContentText("Vous avez dépassé votre budget")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(ressources, image)));
+        ApplicationDemo.getNotificationManager().notify(notificationId, notification.build());
+
     }
 
     public void deleteFromDatabase(){
@@ -110,28 +124,21 @@ public class NotifPhone extends Observable implements INotification {
         setChanged();
         notifyObservers();
     }
-    public void sendNotif(NotificationCompat.Builder notification, int notificationId, int timeout){
-        notification.setSmallIcon(R.drawable.ic_baseline_apps_24)
-                .setContentTitle("Attention!")
-                .setContentText("Vous avez dépassé votre budget")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setTimeoutAfter(timeout);
-        ApplicationDemo.getNotificationManager().notify(notificationId, notification.build());
-    }
 
 
-    public static Comparator<NotifPhone> sortByCategory = new Comparator<NotifPhone>() {
+
+    public static Comparator<NotifPhoneImage> sortByCategory = new Comparator<NotifPhoneImage>() {
         @Override
-        public int compare(NotifPhone o1, NotifPhone o2) {
+        public int compare(NotifPhoneImage o1, NotifPhoneImage o2) {
             String n1 = o1.getCategory().toLowerCase();
             String n2 = o2.getCategory().toLowerCase();
             return n1.compareTo(n2);
         }
     };
 
-    public static Comparator<NotifPhone> sortByDate= new Comparator<NotifPhone>() {
+    public static Comparator<NotifPhoneImage> sortByDate= new Comparator<NotifPhoneImage>() {
         @Override
-        public int compare(NotifPhone o1, NotifPhone o2) {
+        public int compare(NotifPhoneImage o1, NotifPhoneImage o2) {
             Date d1 = o1.date;
             Date d2 = o2.date;
             return (-1) * d1.compareTo(d2);

@@ -2,6 +2,8 @@ package edu.polytech.ebudget.datamodels.notiffactory;
 
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
@@ -23,21 +25,28 @@ public class NotifCalendar implements INotification{
         this.user = user;
     }
 
-    @Override
     public IThreshold getThreshold() {
         return threshold;
     }
 
-    @Override
     public String getDescription() {
         return description;
+    }
+
+    public void sendNotif(NotificationCompat.Builder notification, int notificationId) {
+
+    }
+
+    @Override
+    public void deleteFromDatabase() {
+        return;
     }
 
     @Override
     public void addToDatabase() {
         Map<String, Object> notif = new HashMap<>();
         notif.put("category", this.threshold.getCategory());
-        notif.put("date", this.threshold.firstReached());
+        notif.put("date", "a");
         notif.put("description", description);
         notif.put("user", user);
 

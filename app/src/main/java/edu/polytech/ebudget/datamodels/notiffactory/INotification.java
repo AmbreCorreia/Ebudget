@@ -1,10 +1,10 @@
 package edu.polytech.ebudget.datamodels.notiffactory;
 
+import androidx.core.app.NotificationCompat;
+
 import java.util.Date;
 
 public interface INotification {
-
-    public IThreshold getThreshold();
-    public String getDescription();
+    public void deleteFromDatabase();
     public void addToDatabase();
 }

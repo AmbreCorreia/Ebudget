@@ -2,9 +2,10 @@ package edu.polytech.ebudget.datamodels.notiffactory;
 
 import java.util.Date;
 
-public interface IThreshold {
+import edu.polytech.ebudget.R;
 
-    boolean isReached();
+public interface IThreshold {
+    public static int WARNING_IMG = R.drawable.warning;
+    public static int ALERT_IMG = R.drawable.alert;
     String getCategory();
-    Date firstReached();
 }
