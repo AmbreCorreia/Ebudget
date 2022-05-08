@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -106,7 +107,19 @@ public class FragmentInCategory extends Fragment {
             });
             builder.show();
         });
+
+        binding.changecatbudget.setOnClickListener(click -> {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("category", category);
+            bundle.putString("fragment", "InCategory");
+            FragmentChangeBudget frag = new FragmentChangeBudget();
+            frag.setArguments(bundle);
+            FragmentManager fragmentManager = ((AppCompatActivity)getContext()).getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, frag);
+            fragmentTransaction.commit();
+        });
+
         return binding.getRoot();
     }
-
 }
