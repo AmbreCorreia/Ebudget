@@ -3,6 +3,7 @@ package edu.polytech.ebudget.fragmentsFooter;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,6 +19,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import edu.polytech.ebudget.FragmentChangeBudget;
+import edu.polytech.ebudget.FragmentInCategory;
 import edu.polytech.ebudget.FragmentListExpenses;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.databinding.ActivityHomeBinding;
@@ -87,7 +90,7 @@ public class FragmentHome extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         for (QueryDocumentSnapshot document : task.getResult()){
-                            Category cat = document.toObject(Category.class);
+                            cat = document.toObject(Category.class);
                             binding.textViewProgress.setText(String.valueOf(cat.budget));
                             int progress = (int) ((float)(cat.expense*100)/ (float)cat.budget);
                             binding.progressBar.setProgress(progress);
@@ -99,6 +102,18 @@ public class FragmentHome extends Fragment {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, new FragmentListExpenses());
+            fragmentTransaction.commit();
+        });
+
+        binding.budgetButton.setOnClickListener(click -> {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("category", cat);
+            bundle.putString("fragment", "Home");
+            FragmentChangeBudget frag = new FragmentChangeBudget();
+            frag.setArguments(bundle);
+            FragmentManager fragmentManager = ((AppCompatActivity)getContext()).getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, frag);
             fragmentTransaction.commit();
         });
 
