@@ -10,10 +10,10 @@
         style="@style/CircularDeterminateProgressBar"
         android:layout_width="68dp"
         android:layout_height="64dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/display_budget"
+        app:layout_constraintStart_toEndOf="@+id/display_budget"
+        app:layout_constraintTop_toTopOf="@+id/display_budget"
         tools:progress="60" />
 
     <TextView
@@ -21,40 +21,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/progress_bar_category"
         app:layout_constraintEnd_toEndOf="@+id/progress_bar_category"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="@+id/progress_bar_category"
         app:layout_constraintTop_toTopOf="@+id/progress_bar_category"
+        app:layout_constraintVertical_bias="0.47"
         tools:text="60%" />
 
     <TextView
         android:id="@+id/display_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="40dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/progress_bar_category"
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/display_budget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="60dp"
         android:text="TextView"
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/display_name"
         app:layout_constraintStart_toEndOf="@+id/display_name"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="40dp"
-        android:text="Button"
-        app:layout_constraintStart_toEndOf="@+id/display_budget"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/display_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
