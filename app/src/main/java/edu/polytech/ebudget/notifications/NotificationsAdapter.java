@@ -50,17 +50,6 @@ public class NotificationsAdapter extends ArrayAdapter<Notification> {
                 listner.onClickNotification(item, position);
             });
 
-            /*b.setOnClickListener(click -> {
-                Bundle bundle = new Bundle();
-                bundle.putString("param1", item.name);
-                FragmentInCategory frag = new FragmentInCategory();
-                frag.setArguments(bundle);
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, frag);
-                fragmentTransaction.commit();
-            });*/
-
             return v;
 
         } catch (Exception ex) {

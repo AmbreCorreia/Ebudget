@@ -22,8 +22,7 @@ import edu.polytech.ebudget.datamodels.notiffactory.INotification;
 import edu.polytech.ebudget.datamodels.notiffactory.IThreshold;
 import edu.polytech.ebudget.datamodels.notiffactory.ThresholdValue;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
-import edu.polytech.ebudget.notifications.mvc.NotificationController;
-import edu.polytech.ebudget.notifications.mvc.NotificationModel;
+import edu.polytech.ebudget.notifications.mvc.ControllerNotification;
 
 public class NotifPhoneImage extends Observable implements INotification {
     private final String TAG = "notifications " + getClass().getSimpleName();
@@ -33,11 +32,11 @@ public class NotifPhoneImage extends Observable implements INotification {
     public String user = "";
     public String id = "";
     public ThresholdValue threshold;
-    private NotificationController controller = null;
+    private ControllerNotification controller = null;
 
 
 
-    public NotifPhoneImage(NotificationController controller){
+    public NotifPhoneImage(ControllerNotification controller){
         super();
         this.date = new Date();
         this.controller = controller;
@@ -47,7 +46,7 @@ public class NotifPhoneImage extends Observable implements INotification {
     public NotifPhoneImage(){
     }
 
-    public NotifPhoneImage(NotificationController controller, String description, String id, String user, ThresholdValue threshold){
+    public NotifPhoneImage(ControllerNotification controller, String description, String id, String user, ThresholdValue threshold){
         this.controller = controller;
         this.description = description;
         this.id = id;
@@ -55,7 +54,7 @@ public class NotifPhoneImage extends Observable implements INotification {
         this.threshold = threshold;
     }
 
-    public void setController(NotificationController controller) {
+    public void setController(ControllerNotification controller) {
         this.controller = controller;
     }
     public void setDescription(String description) {

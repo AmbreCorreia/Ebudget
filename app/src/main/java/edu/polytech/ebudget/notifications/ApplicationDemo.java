@@ -25,7 +25,6 @@ public class ApplicationDemo extends Application {
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, importance);
             notificationChannel.setDescription(description);
 
-            //peut-etre fait qu'une seule, ne pourra plus être changé après
             notificationManager = getSystemService(NotificationManager.class);
             Objects.requireNonNull(notificationManager).createNotificationChannel(notificationChannel);
         }

@@ -1,14 +1,10 @@
 package edu.polytech.ebudget.notifications.mvc;
 
 import android.util.Log;
-
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Observable;
-
 import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Notification;
-import edu.polytech.ebudget.notifications.mvc.NotificationController;
 
 public class ModelNotification extends Observable {
     private final String TAG = "notifications " + getClass().getSimpleName();

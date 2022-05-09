@@ -36,10 +36,6 @@ import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
-import edu.polytech.ebudget.notifications.mvc.FragmentListeNotif;
-import edu.polytech.ebudget.notifications.mvc.NotificationController;
-import edu.polytech.ebudget.notifications.mvc.NotificationModel;
-import edu.polytech.ebudget.notifications.mvc.NotificationsView;
 import edu.polytech.ebudget.notifications.mvc.ControllerNotification;
 import edu.polytech.ebudget.notifications.mvc.ModelNotification;
 import edu.polytech.ebudget.notifications.mvc.ViewNotification;
@@ -144,13 +140,6 @@ public class FragmentNotif extends Fragment {
 
 
                 new Notification(category, description, user, id).addToDatabase();
-                /*Notification newNotif  = new Notification();
-                newNotif.setId(id);
-                newNotif.setUser(user);
-                newNotif.setDescription(description);
-                newNotif.setCategory(category);
-                newNotif.setThreshold(threshold);
-                newNotif.addToDatabase();*/
 
             }
 
@@ -174,19 +163,7 @@ public class FragmentNotif extends Fragment {
                 //Intent intent = new Intent(getContext(), Notifications.class);
                 //startActivity(intent);
 
-                //MVC1
-               /* NotificationsView nView = new NotificationsView(var_inflater.getContext());
-                NotificationModel model = new NotificationModel(null);
-
-                model.addObserver(nView);
-
-                NotificationController controller = new NotificationController(nView, model);
-                model.setController(controller);
-                nView.setListener(controller);
-
-                */
-
-                //MVC2
+                //MVC
                 ViewNotification viewNotification = new ViewNotification();
                 ModelNotification modelNotification = new ModelNotification(FirebaseFirestore.getInstance());
 
@@ -199,14 +176,6 @@ public class FragmentNotif extends Fragment {
                 Intent intent = new Intent(getContext(), ViewNotification.class);
                 startActivity(intent);
 
-
-                /*
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, nView);
-                fragmentTransaction.commit();
-
-                 */
             }
         });
 

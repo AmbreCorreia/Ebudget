@@ -126,22 +126,6 @@ public class Notifications extends AppCompatActivity implements INotificationAda
                 .setNeutralButton("Supprimer", (dialogInterface, i) -> {
                     System.out.println("click sur supprimer");
 
-                    /*FirebaseFirestore.getInstance().collection("notifications").
-                            document(notification.id)
-                            .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error deleting document", e);
-                                }
-                            }); */
-
                     FirebaseFirestore.getInstance().collection(FirebasePaths.notifications).
                             document(notification.id)
                             .delete()
