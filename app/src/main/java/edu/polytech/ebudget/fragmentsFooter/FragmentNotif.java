@@ -1,40 +1,23 @@
 package edu.polytech.ebudget.fragmentsFooter;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
-
 import static edu.polytech.ebudget.notifications.ApplicationDemo.CHANNEL_ID;
 
-import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.icu.util.Calendar;
-import android.icu.util.TimeZone;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.provider.CalendarContract;
-import android.provider.CalendarContract.Events;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,16 +31,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.polytech.ebudget.FragmentAddCategory;
 import edu.polytech.ebudget.R;
 import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.notifications.ApplicationDemo;
-import edu.polytech.ebudget.notifications.ClasseQuiAppelleTout;
-import edu.polytech.ebudget.notifications.Notifications;
 import edu.polytech.ebudget.notifications.mvc.FragmentListeNotif;
+import edu.polytech.ebudget.notifications.mvc.NotificationController;
 import edu.polytech.ebudget.notifications.mvc.NotificationModel;
+import edu.polytech.ebudget.notifications.mvc.NotificationsView;
+import edu.polytech.ebudget.notifications.mvc.ControllerNotification;
+import edu.polytech.ebudget.notifications.mvc.ModelNotification;
+import edu.polytech.ebudget.notifications.mvc.ViewNotification;
 import edu.polytech.ebudget.utils.CalendarHelper;
 
 /**
@@ -157,14 +142,15 @@ public class FragmentNotif extends Fragment {
                 String id = String.valueOf(notificationId);
                 System.out.println("id: " + id);
 
-                //new Notification(category, description, user, id).addToDatabase();
-                NotificationModel newNotif  = new NotificationModel(null);
+
+                new Notification(category, description, user, id).addToDatabase();
+                /*Notification newNotif  = new Notification();
                 newNotif.setId(id);
                 newNotif.setUser(user);
                 newNotif.setDescription(description);
                 newNotif.setCategory(category);
                 newNotif.setThreshold(threshold);
-                newNotif.addToDatabase();
+                newNotif.addToDatabase();*/
 
             }
 
@@ -185,16 +171,42 @@ public class FragmentNotif extends Fragment {
         btnNotifList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(getContext(), Notifications.class);
+                //Intent intent = new Intent(getContext(), Notifications.class);
+                //startActivity(intent);
+
+                //MVC1
+               /* NotificationsView nView = new NotificationsView(var_inflater.getContext());
+                NotificationModel model = new NotificationModel(null);
+
+                model.addObserver(nView);
+
+                NotificationController controller = new NotificationController(nView, model);
+                model.setController(controller);
+                nView.setListener(controller);
+
+                */
+
+                //MVC2
+                ViewNotification viewNotification = new ViewNotification();
+                ModelNotification modelNotification = new ModelNotification(FirebaseFirestore.getInstance());
+
+                modelNotification.addObserver(viewNotification);
+
+                ControllerNotification controllerNotification = new ControllerNotification();
+                modelNotification.setController(controllerNotification);
+                viewNotification.setListner(controllerNotification);
+
+                Intent intent = new Intent(getContext(), ViewNotification.class);
                 startActivity(intent);
-                 */
 
-                //ClasseQuiAppelleTout.onViewCreated(var_inflater.findViewById(R.id.view_notifications));
 
+                /*
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, new FragmentListeNotif());
+                fragmentTransaction.replace(R.id.frame_layout, nView);
                 fragmentTransaction.commit();
+
+                 */
             }
         });
 
