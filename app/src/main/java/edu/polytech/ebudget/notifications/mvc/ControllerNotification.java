@@ -11,10 +11,14 @@ public class ControllerNotification implements INotificationAdapter {
     ViewNotification viewNotification;
     Boolean modelChanged = false;
 
+    public ControllerNotification(ViewNotification viewNotification, ModelNotification modelNotification){
+        this.viewNotification = viewNotification;
+        this.modelNotification = modelNotification;
+    }
 
     @Override
-    public void onClickNotification(Context context, Notification notification, int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context)
+    public void onClickNotification(Notification notification, int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(viewNotification.getApplicationContext())
                 .setMessage("La supression de : " + notification.getCategory() + ", sera définitive. Veuillez confirmer")
                 .setNeutralButton("Annuler", null)
                 .setNeutralButton("Supprimer", (dialogInterface, i) -> {

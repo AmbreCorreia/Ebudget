@@ -169,7 +169,7 @@ public class FragmentNotif extends Fragment {
 
                 modelNotification.addObserver(viewNotification);
 
-                ControllerNotification controllerNotification = new ControllerNotification();
+                ControllerNotification controllerNotification = new ControllerNotification(viewNotification, modelNotification);
                 modelNotification.setController(controllerNotification);
                 viewNotification.setListner(controllerNotification);
 
