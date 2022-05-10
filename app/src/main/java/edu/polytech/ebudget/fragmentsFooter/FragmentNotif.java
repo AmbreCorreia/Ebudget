@@ -58,6 +58,7 @@ public class FragmentNotif extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Category category;
 
     public FragmentNotif() {
         // Required empty public constructor
@@ -98,22 +99,19 @@ public class FragmentNotif extends Fragment {
         Button btnAlert = var_inflater.findViewById(R.id.buttonAlert);
         Spinner categorySpinner = (Spinner) var_inflater.findViewById(R.id.spinner_category_notif);
 
-        FirebaseFirestore.getInstance().collection("categories")
+        FirebaseFirestore.getInstance().collection(FirebasePaths.categories)
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        ArrayList documents = new ArrayList();
-                        for (QueryDocumentSnapshot document : task.getResult()){
-                            Category cat = document.toObject(Category.class);
-                            documents.add(cat.name);
-                        }
-
-                        ArrayAdapter array = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, documents);
-                        array.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        categorySpinner.setAdapter(array);
+                .addOnCompleteListener(task -> {
+                    ArrayList documents = new ArrayList();
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        Category cat = document.toObject(Category.class);
+                        documents.add(cat.name);
                     }
+
+                    ArrayAdapter array = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, documents);
+                    array.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    categorySpinner.setAdapter(array);
                 });
 
         SeekBar seekBar = (SeekBar)var_inflater.findViewById(R.id.seekBar);
@@ -179,21 +177,17 @@ public class FragmentNotif extends Fragment {
             }
         });
 
-       /*var_inflater.findViewById(R.id.AddCAlendarEvent).setOnClickListener(click -> {
-           Intent insertCalendarIntent = new Intent(Intent.ACTION_INSERT)
-                   .setData(CalendarContract.Events.CONTENT_URI)
-                   .putExtra(CalendarContract.Events.TITLE, "budget dépassé")
-                   .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
-                   .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, Calendar.getInstance().getTimeInMillis()) // Only date part is considered when ALL_DAY is true; Same as DTSTART
-                   .putExtra(CalendarContract.EXTRA_EVENT_END_TIME,Calendar.getInstance().getTimeInMillis()+1) // Only date part is considered when ALL_DAY is true
-                   .putExtra(CalendarContract.Events.DESCRIPTION, "budget dépassé"); // Description
-
-           startActivity(insertCalendarIntent);
-
-       });*/
-
         var_inflater.findViewById(R.id.AddCAlendarEvent).setOnClickListener(click -> {
-            CalendarHelper.addCalendarEvent(getActivity(), getContext(), "Budget dépassé");
+            FirebaseFirestore.getInstance().collection(FirebasePaths.categories)
+                    .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
+                    .whereEqualTo("name", categorySpinner.getSelectedItem().toString())
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        for (QueryDocumentSnapshot document : task.getResult()){
+                           category = document.toObject(Category.class);
+                        }
+                        CalendarHelper.addCalendarEvent(getActivity(), getContext(), "Votre dépense pour la categorie " + category.name + " s'élève à " + String.valueOf(category.expense) + "€");
+                    });
         });
 
         // Inflate the layout for this fragment

@@ -120,6 +120,12 @@ public class FragmentInCategory extends Fragment {
             fragmentTransaction.commit();
         });
 
+        binding.expensebudget.setText(String.valueOf(category.expense+"€"));
+        binding.totalbudget.setText(String.valueOf(category.budget+"€"));
+
+        int progress = (int) ((float)(category.expense*100)/ (float)category.budget);
+        binding.progressBar.setProgress(progress);
+
         return binding.getRoot();
     }
 }
