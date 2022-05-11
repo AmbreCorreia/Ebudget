@@ -67,6 +67,7 @@ public class Notification {
         notif.put("description", description);
         notif.put("user", user);
         notif.put("id", id);
+        notif.put("threshold", threshold);
 
 
         database.collection(FirebasePaths.notifications).document(id)
