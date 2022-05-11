@@ -37,13 +37,13 @@ public class Notification {
 
     public Notification(){}
 
-    //TODO ajouter threshold
-    public Notification(String category, String description, String user, String id){
+    public Notification(String category, String description, String user, String id, int thres){
         this.category = category;
         this.date = new Date();
         this.description = description;
         this.user = user;
         this.id = id;
+        this.threshold = thres;
     }
 
     public String getCategory() {

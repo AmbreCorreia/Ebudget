@@ -117,7 +117,7 @@ public class FragmentNotif extends Fragment {
         SeekBar seekBar = (SeekBar)var_inflater.findViewById(R.id.seekBar);
         seekBar.setMax(100);
         seekBar.setMin(0);
-        int threshold = seekBar.getProgress() / 100;
+        int threshold = seekBar.getProgress();
 
         Switch notifEnabled = (Switch)var_inflater.findViewById(R.id.switchNotifs);
         Map<String, Object> data = new HashMap<>();
@@ -136,9 +136,7 @@ public class FragmentNotif extends Fragment {
                 String id = String.valueOf(notificationId);
                 System.out.println("id: " + id);
 
-
-                new Notification(category, description, user, id).addToDatabase();
-
+                new Notification(category, description, user, id, threshold).addToDatabase();
             }
 
             private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {
