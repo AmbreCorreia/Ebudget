@@ -105,6 +105,12 @@ public class FragmentAddItemCategory extends Fragment {
 
             this.check(category, item, user);
 
+            if(category.name.equals("test")){
+                AbstractNotifFactory factory = new NotifPhoneFactory();
+                NotifPhoneImage notifImg = factory.createNotification(null, "test", "votre budget est dépassé", "4",FirebaseAuth.getInstance().getUid(), 60, true);
+                notifImg.sendNotif(new NotificationCompat.Builder(getActivity().getApplicationContext(), "channel1"), 0,getResources(), IThreshold.ALERT_IMG);
+            }
+
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, new FragmentCategory());
