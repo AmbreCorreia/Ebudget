@@ -2,10 +2,12 @@ package edu.polytech.ebudget;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,13 +31,17 @@ import edu.polytech.ebudget.datamodels.FirebasePaths;
 import edu.polytech.ebudget.datamodels.Item;
 import edu.polytech.ebudget.datamodels.Notification;
 import edu.polytech.ebudget.datamodels.Preference;
+import edu.polytech.ebudget.datamodels.notiffactory.AbstractNotifFactory;
+import edu.polytech.ebudget.datamodels.notiffactory.IThreshold;
+import edu.polytech.ebudget.datamodels.notiffactory.NotifPhoneFactory;
+import edu.polytech.ebudget.datamodels.notiffactory.NotifPhoneImage;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
 
 public class FragmentAddItemCategory extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String CATEGORY = "param1";
+    private static final String CATEGORY = "category";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
@@ -83,6 +89,7 @@ public class FragmentAddItemCategory extends Fragment {
         bind = FragmentAdditemCategoryBinding.inflate(inflater, container, false);
 
         bind.addButton.setOnClickListener(click -> {
+            Log.d("BORDEL", "pourquoi");
             String name = bind.nameInput.getText().toString().trim();
             int price = Integer.parseInt(bind.priceInput.getText().toString().trim());
             String user = FirebaseAuth.getInstance().getUid();
@@ -96,7 +103,7 @@ public class FragmentAddItemCategory extends Fragment {
             FirebaseFirestore.getInstance().collection(FirebasePaths.categories).document(category.id)
                     .set(data, SetOptions.merge());
 
-            //this.check(category, item, user);
+            this.check(category, item, user);
 
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -108,6 +115,7 @@ public class FragmentAddItemCategory extends Fragment {
     }
 
     private void check(Category category, Item item, String user){
+        Log.d("NOTIF", "dans check");
         FirebaseFirestore.getInstance().collection(FirebasePaths.preferences)
                 .whereEqualTo("user", user)
                 .get()
@@ -122,10 +130,14 @@ public class FragmentAddItemCategory extends Fragment {
                                     .addOnCompleteListener(task1 -> {
                                         for(QueryDocumentSnapshot notif : task1.getResult()){
                                             Notification notification = notif.toObject(Notification.class);
+                                            Log.d("NOTIF", "requete");
                                             int actual = (int) ((float)(category.expense*100)/ (float)category.budget);
                                             int future = (int) ((float)((category.expense + item.price*item.quantity)*100)/ (float)category.budget);
+                                            AbstractNotifFactory factory = new NotifPhoneFactory();
+                                            NotifPhoneImage notifImg = factory.createNotification(null, notification.category, notification.description, notification.id, notification.user,notification.threshold, true);
                                             if(actual < notification.threshold && future > notification.threshold){
-                                                //TODO send notification
+                                                Log.d("NOTIF", "dans if");
+                                                notifImg.sendNotif(new NotificationCompat.Builder(getActivity().getApplicationContext(), "channel1"), 0,getResources(), IThreshold.ALERT_IMG);
                                             }
                                         }
                                     });
