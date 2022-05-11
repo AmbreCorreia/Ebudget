@@ -13,10 +13,11 @@ import android.widget.Toast;
 
 import edu.polytech.ebudget.R;
 
-public class CameraActivity extends AppCompatActivity implements IPictureActivity {
+public class CameraActivity extends AppCompatActivity implements IPictureActivity, IStorageActivity {
 
     private Bitmap picture;
     private PictureFragment pictureFragment;
+    private StorageFragment storageFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,19 @@ public class CameraActivity extends AppCompatActivity implements IPictureActivit
             transaction.addToBackStack(null);
             transaction.commit();
         }
+        storageFragment = (StorageFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentStorage);
+        if (storageFragment == null){
+            storageFragment = new StorageFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragmentStorage, storageFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case REQUEST_CAMERA: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -47,8 +57,18 @@ public class CameraActivity extends AppCompatActivity implements IPictureActivit
                 }
             }
             break;
+            case REQUEST_MEDIA_WRITE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    storageFragment.saveToInternalStorage(picture);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Write permission granted", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Write permission NOT granted", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+            break;
         }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -66,5 +86,13 @@ public class CameraActivity extends AppCompatActivity implements IPictureActivit
                 toast.show();
             }
         }
+    }
+
+
+
+
+    @Override
+    public Bitmap getPictureToSave() {
+        return picture;
     }
 }

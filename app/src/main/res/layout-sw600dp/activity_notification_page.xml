@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="28dp"
-        android:text="Define a threeshold"
+        android:text="Define a threshold"
         android:textColor="#000"
         android:textSize="40dp"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"

@@ -8,23 +8,23 @@
 
     <FrameLayout
         android:id="@+id/fragmentPicture"
-        android:layout_width="415dp"
-        android:layout_height="480dp"
+        android:layout_width="792dp"
+        android:layout_height="638dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-    </FrameLayout>
+        app:layout_constraintVertical_bias="0.0"></FrameLayout>
 
     <FrameLayout
         android:id="@+id/fragmentStorage"
-        android:layout_width="413dp"
-        android:layout_height="218dp"
+        android:layout_width="802dp"
+        android:layout_height="279dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentPicture" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentPicture"
+        app:layout_constraintVertical_bias="0.168" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -100,17 +100,14 @@ public class CalendarHelper {
                 .whereEqualTo("user", FirebaseAuth.getInstance().getUid())
                 .whereNotEqualTo("calendarID", -1)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Preference preference = document.toObject(Preference.class);
-                            Log.d("chaque pref:", String.valueOf(preference));
-                            pref.add(preference);
-                            Log.d("array:", pref.toString());
-                        }
-                        CalendarHelper.addOneEvent(activity, context, msg, pref);
+                .addOnCompleteListener(task -> {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Preference preference = document.toObject(Preference.class);
+                        Log.d("chaque pref:", String.valueOf(preference));
+                        pref.add(preference);
+                        Log.d("array:", pref.toString());
                     }
+                    CalendarHelper.addOneEvent(activity, context, msg, pref);
                 });
     }
 }
