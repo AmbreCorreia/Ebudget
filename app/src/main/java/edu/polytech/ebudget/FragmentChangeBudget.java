@@ -4,24 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import edu.polytech.ebudget.databinding.ChangebudgetBinding;
 import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.datamodels.FirebasePaths;
@@ -29,13 +19,10 @@ import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
 import edu.polytech.ebudget.fragmentsFooter.FragmentHome;
 
 public class FragmentChangeBudget extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "category";
     private static final String ARG_PARAM2 = "fragment";
 
-    // TODO: Rename and change types of parameters
     private ChangebudgetBinding binding;
     private Category cat;
     private String fragment;

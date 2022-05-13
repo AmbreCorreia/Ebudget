@@ -1,25 +1,14 @@
 package edu.polytech.ebudget.utils;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import java.text.DateFormat;
-import java.util.ArrayList;
-
-import edu.polytech.ebudget.FragmentInCategory;
 import edu.polytech.ebudget.R;
-import edu.polytech.ebudget.datamodels.Category;
 import edu.polytech.ebudget.datamodels.Item;
 
 public class ExpenseListAdapter extends ArrayAdapter<Item> {

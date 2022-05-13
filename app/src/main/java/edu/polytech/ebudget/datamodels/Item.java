@@ -1,12 +1,6 @@
 package edu.polytech.ebudget.datamodels;
 
 import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
@@ -25,7 +19,9 @@ public class Item {
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddItem";
 
-    public Item(){}
+    public Item(){
+        //requiered
+    }
 
     public Item(String name, String category, int price, String user, boolean isBought){
         this.name = name;

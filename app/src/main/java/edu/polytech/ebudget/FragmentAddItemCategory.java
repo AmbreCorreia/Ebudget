@@ -38,37 +38,15 @@ import edu.polytech.ebudget.datamodels.notiffactory.NotifPhoneImage;
 import edu.polytech.ebudget.fragmentsFooter.FragmentCategory;
 
 public class FragmentAddItemCategory extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String CATEGORY = "category";
-    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private Category category;
-    private String mParam2;
     private FragmentAdditemCategoryBinding bind;
 
     public FragmentAddItemCategory() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FourthFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentAddItemCategory newInstance(String param1, String param2) {
-        FragmentAddItemCategory fragment = new FragmentAddItemCategory();
-        Bundle args = new Bundle();
-        args.putString(CATEGORY, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -78,7 +56,6 @@ public class FragmentAddItemCategory extends Fragment {
             if (getArguments() != null) {
                 category = getArguments().getParcelable(CATEGORY);
             }
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 

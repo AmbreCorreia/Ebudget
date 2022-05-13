@@ -10,13 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
 import edu.polytech.ebudget.R;
 
 public class PictureFragment extends Fragment {
@@ -26,8 +24,6 @@ public class PictureFragment extends Fragment {
     public PictureFragment(){
 
     }
-
-
 
     @Nullable
     @Override

@@ -3,9 +3,7 @@ package edu.polytech.ebudget.datamodels;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +16,9 @@ public class Category implements Parcelable {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static final String TAG = "AddCategory";
 
-    public Category(){}
+    public Category(){
+        //requiered
+    }
 
     public Category(String name, int budget, String user){
         this.name = name;
